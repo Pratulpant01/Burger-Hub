@@ -1,111 +1,141 @@
-import 'package:burgerhub/constants/constant.dart';
-import 'package:burgerhub/widgets/total_rating_widget.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:burgerhub/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:burgerhub/constants/constant.dart';
+import 'package:burgerhub/models/product_model.dart';
+import 'package:burgerhub/widgets/total_rating_widget.dart';
+
 class productCard extends StatelessWidget {
-  const productCard({
+  ProductModel product;
+  productCard({
     Key? key,
+    required this.product,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1 / 1.3,
-      child: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 15,
-        ),
-        width: screenSize.width / 2,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: Colors.grey.shade300,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductScreen(product: product),
           ),
-        ),
-        child: Stack(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                  child: Image.network(
-                    'https://media.istockphoto.com/photos/cheeseburger-with-tomato-and-lettuce-on-wooden-board-picture-id1309352410?b=1&k=20&m=1309352410&s=170667a&w=0&h=YduYl7Us5MSrw1EFSCxR9zDRLnEFa_O608NdqhHlSyM=',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                FittedBox(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                    child: Text(
-                      'Veg Cheese Burger',
-                      style: productTitleStyle,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Text(
-                      'Delicious Cheese Burger with Extra Toppings. Grab now with 50% off',
-                      style: productDescriptionStyle,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '₹150',
-                          style: productPricingStyle,
-                        ),
-                        totalRatingWidget(
-                          size: 14,
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 10,
-                left: 5,
+        );
+      },
+      child: Expanded(
+        child: Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 15,
+          ),
+          width: screenSize.width / 2,
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey.shade300,
               ),
-              child: FittedBox(
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(0.6),
-                    borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(20)),
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AspectRatio(
+                    aspectRatio: 16 / 10,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                      child: Hero(
+                        tag: 1,
+                        child: Image.network(
+                          product.imageUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Center(
-                    child: Text(
-                      'Non Veg',
-                      style: GoogleFonts.acme(
-                        color: Colors.white,
+                  SizedBox(
+                    height: screenSize.height * .003,
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 5),
+                      child: Text(
+                        product.productName,
+                        style: productTitleStyle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Text(
+                        product.description,
+                        style: productDescriptionStyle,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                  Divider(),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 5,
+                        right: 5,
+                        bottom: 3,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '₹${product.price}',
+                            style: productPricingStyle,
+                          ),
+                          totalRatingWidget(
+                            size: 10,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  left: 5,
+                ),
+                child: FittedBox(
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: product.type == 'Veg'
+                          ? Colors.green.withOpacity(0.8)
+                          : Colors.red.withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        product.type,
+                        style: GoogleFonts.acme(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

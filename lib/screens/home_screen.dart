@@ -26,12 +26,14 @@ class HomeScreen extends StatelessWidget {
             bannerWidget(selectedBanner: selectedBanner),
             categoryShowcase(),
             Container(
-              height: screenSize.height * .3,
+              height: screenSize.height * .31,
               child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: 6,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return productCard();
+                    return productCard(
+                      product: products[index],
+                    );
                   }),
             ),
             Divider(),

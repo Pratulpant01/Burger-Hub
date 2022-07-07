@@ -19,13 +19,7 @@ class SearchScreen extends StatelessWidget {
               crossAxisCount: 2,
               childAspectRatio: 1 / 1.3,
             ),
-            children: [
-              productCard(),
-              productCard(),
-              productCard(),
-              productCard(),
-              productCard(),
-            ],
+            children: [],
           ),
         ));
   }

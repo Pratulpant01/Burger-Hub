@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
-  const AppBarWidget({Key? key}) : super(key: key);
+  bool hasBackButton;
+  AppBarWidget({Key? key, this.hasBackButton = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,21 +16,31 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ScreenLayout(selectedIndex: 1),
+            hasBackButton
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: primaryColor,
+                    ),
+                  )
+                : IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ScreenLayout(selectedIndex: 1),
+                        ),
+                      );
+                    },
+                    icon: SvgPicture.asset(
+                      'assets/search.svg',
+                      height: screenSize.height * .025,
+                      color: primaryColor,
+                    ),
                   ),
-                );
-              },
-              icon: SvgPicture.asset(
-                'assets/search.svg',
-                height: screenSize.height * .025,
-                color: primaryColor,
-              ),
-            ),
             Image.asset(
               'assets/burgerhub.png',
               height: screenSize.height * .5,
