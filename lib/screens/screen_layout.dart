@@ -1,7 +1,6 @@
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ScreenLayout extends StatefulWidget {
   int selectedIndex;
@@ -20,7 +19,7 @@ class _ScreenLayoutState extends State<ScreenLayout> {
       appBar: AppBarWidget(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: bgSecondaryColor,
-        type: BottomNavigationBarType.shifting,
+        type: BottomNavigationBarType.fixed,
         selectedItemColor: primaryColor,
         onTap: (index) {
           setState(() {

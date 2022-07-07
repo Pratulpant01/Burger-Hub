@@ -24,7 +24,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
               ),
             ),
             Image.asset(
-              'assets/BurgerHub.png',
+              'assets/burgerhub.png',
               height: screenSize.height * .5,
               fit: BoxFit.cover,
             ),
