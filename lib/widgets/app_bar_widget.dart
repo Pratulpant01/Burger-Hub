@@ -16,7 +16,14 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ScreenLayout(selectedIndex: 1),
+                  ),
+                );
+              },
               icon: SvgPicture.asset(
                 'assets/search.svg',
                 height: screenSize.height * .025,

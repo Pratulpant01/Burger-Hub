@@ -15,8 +15,6 @@ class _ScreenLayoutState extends State<ScreenLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgSecondaryColor,
-      appBar: AppBarWidget(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: bgSecondaryColor,
         type: BottomNavigationBarType.fixed,

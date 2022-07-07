@@ -4,6 +4,7 @@ import 'package:burgerhub/widgets/category_showcase.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../widgets/app_bar_widget.dart';
 import '../widgets/banner_widget.dart';
 import '../widgets/heading_widget.dart';
 import '../widgets/product_card_widget.dart';
@@ -15,38 +16,41 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-          bannerWidget(selectedBanner: selectedBanner),
-          categoryShowcase(),
-          Container(
-            height: screenSize.height * .3,
-            child: ListView.builder(
-                itemCount: 5,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return productCard();
-                }),
-          ),
-          Divider(),
-          headingWidget(),
-          Container(
-            height: screenSize.height * .5,
-            child: ListView.builder(
-                primary: false,
-                shrinkWrap: true,
-                itemCount: 5,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) {
-                  return ProductListCase();
-                }),
-          ),
-          Container(
-            height: screenSize.height / 3,
-          ),
-        ],
+    return Scaffold(
+      backgroundColor: bgSecondaryColor,
+      appBar: AppBarWidget(),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            bannerWidget(selectedBanner: selectedBanner),
+            categoryShowcase(),
+            Container(
+              height: screenSize.height * .3,
+              child: ListView.builder(
+                  itemCount: 5,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return productCard();
+                  }),
+            ),
+            Divider(),
+            headingWidget(),
+            Container(
+              width: screenSize.width,
+              child: ListView.builder(
+                  primary: false,
+                  shrinkWrap: true,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return ProductListCase();
+                  }),
+            ),
+            Container(
+              height: screenSize.height / 3,
+            ),
+          ],
+        ),
       ),
     );
   }
