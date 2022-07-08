@@ -17,48 +17,50 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+          color: Colors.red.withOpacity(0.1),
+          border: Border.all(
+            color: Colors.red,
+          ),
+          borderRadius: BorderRadius.circular(10)),
       child: Row(
         children: [
-          roundButton(
-            icon: Icon(
-              Icons.remove,
-              color: Colors.white,
-            ),
+          IconButton(
             onPressed: () {
               setState(() {
                 value--;
               });
             },
+            icon: Icon(
+              Icons.remove,
+              color: secondaryColor,
+            ),
           ),
           Container(
             height: screenSize.width * .08,
             width: screenSize.width * .08,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: primaryColor,
-              ),
-              borderRadius: BorderRadius.circular(5),
-            ),
             child: Center(
               child: Text(
                 '$value',
                 style: TextStyle(
-                  color: primaryColor,
+                  color: secondaryColor,
+                  fontSize: 20,
                 ),
               ),
             ),
           ),
-          roundButton(
-            icon: Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
+          IconButton(
             onPressed: () {
               setState(() {
                 value++;
               });
             },
-          ),
+            icon: Icon(
+              Icons.add,
+              color: secondaryColor,
+            ),
+          )
         ],
       ),
     );

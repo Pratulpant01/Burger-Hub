@@ -1,3 +1,4 @@
+import 'package:burgerhub/models/addon_model.dart';
 import 'package:burgerhub/models/category_model.dart';
 import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/screens/account_screen.dart';
@@ -13,7 +14,7 @@ Size screenSize =
     MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
 
 // Colors
-Color primaryColor = Color.fromARGB(255, 250, 125, 0);
+Color primaryColor = Color(0xffE25100);
 Color secondaryColor = Color(0xffEE4D2A);
 
 Color bgSecondaryColor = Color.fromARGB(255, 247, 243, 243);
@@ -136,6 +137,34 @@ List bannerImages = [
   'https://burgerking-image.s3.amazonaws.com/products/Home/web/1x_web_20210427105418426638_1440x300jpg',
   'https://burgerking-image.s3.amazonaws.com/products/Home/web/1x_web_20220330141241822628_1440x300jpg',
   'https://burgerking-image.s3.amazonaws.com/products/Home/web/1x_web_20211006080239254637_1440x300jpg',
+];
+
+List<AddOnModel> addonList = [
+  AddOnModel(
+    addonName: 'Paneer',
+    price: 50,
+    isSelected: false,
+  ),
+  AddOnModel(
+    addonName: 'Cheese Slice',
+    price: 30,
+    isSelected: false,
+  ),
+  AddOnModel(
+    addonName: 'Corn',
+    price: 30,
+    isSelected: false,
+  ),
+  AddOnModel(
+    addonName: 'Sauce',
+    price: 2,
+    isSelected: false,
+  ),
+  AddOnModel(
+    addonName: 'Extra Tikki',
+    price: 50,
+    isSelected: false,
+  ),
 ];
 
 // TextStyle Constants

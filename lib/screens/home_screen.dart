@@ -37,7 +37,9 @@ class HomeScreen extends StatelessWidget {
                   }),
             ),
             Divider(),
-            headingWidget(),
+            headingWidget(
+              title: 'All Time Favorite ❤️',
+            ),
             Container(
               width: screenSize.width,
               child: ListView.builder(
@@ -45,7 +47,9 @@ class HomeScreen extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                    return ProductListCase();
+                    return ProductListCase(
+                      product: products[index],
+                    );
                   }),
             ),
             Container(

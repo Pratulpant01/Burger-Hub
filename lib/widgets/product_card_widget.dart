@@ -25,117 +25,115 @@ class productCard extends StatelessWidget {
           ),
         );
       },
-      child: Expanded(
-        child: Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 15,
-          ),
-          width: screenSize.width / 2,
-          decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.grey.shade300,
-              ),
-              borderRadius: BorderRadius.circular(20)),
-          child: Stack(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AspectRatio(
-                    aspectRatio: 16 / 10,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                      child: Hero(
-                        tag: 1,
-                        child: Image.network(
-                          product.imageUrl,
-                          fit: BoxFit.cover,
-                        ),
+      child: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical: 15,
+        ),
+        width: screenSize.width / 2,
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.grey.shade300,
+            ),
+            borderRadius: BorderRadius.circular(20)),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AspectRatio(
+                  aspectRatio: 16 / 10,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    child: Hero(
+                      tag: 1,
+                      child: Image.network(
+                        product.imageUrl,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: screenSize.height * .003,
-                  ),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 5),
-                      child: Text(
-                        product.productName,
-                        style: productTitleStyle,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Text(
-                        product.description,
-                        style: productDescriptionStyle,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ),
-                  Divider(),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 5,
-                        right: 5,
-                        bottom: 3,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            '₹${product.price}',
-                            style: productPricingStyle,
-                          ),
-                          totalRatingWidget(
-                            size: 10,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                  left: 5,
                 ),
-                child: FittedBox(
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: product.type == 'Veg'
-                          ? Colors.green.withOpacity(0.8)
-                          : Colors.red.withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(10),
+                SizedBox(
+                  height: screenSize.height * .003,
+                ),
+                Flexible(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                    child: Text(
+                      product.productName,
+                      style: productTitleStyle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    child: Center(
-                      child: Text(
-                        product.type,
-                        style: GoogleFonts.acme(
-                          color: Colors.white,
+                  ),
+                ),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Text(
+                      product.description,
+                      style: productDescriptionStyle,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Divider(),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 5,
+                      right: 5,
+                      bottom: 3,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          '₹${product.price}',
+                          style: productPricingStyle,
                         ),
+                        totalRatingWidget(
+                          size: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 10,
+                left: 5,
+              ),
+              child: FittedBox(
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    color: product.type == 'Veg'
+                        ? Colors.green.withOpacity(0.8)
+                        : Colors.red.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text(
+                      product.type,
+                      style: GoogleFonts.acme(
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

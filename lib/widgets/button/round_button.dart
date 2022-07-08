@@ -15,7 +15,7 @@ class roundButton extends StatelessWidget {
     return Transform.scale(
       scale: 0.7,
       child: CircleAvatar(
-        backgroundColor: primaryColor,
+        backgroundColor: secondaryColor,
         child: IconButton(
           icon: icon,
           onPressed: onPressed,

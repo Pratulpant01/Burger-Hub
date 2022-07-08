@@ -1,10 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import '../constants/constant.dart';
 
 class headingWidget extends StatelessWidget {
-  const headingWidget({
+  String title;
+
+  headingWidget({
     Key? key,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -16,7 +20,7 @@ class headingWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'All Time Favorite ❤️',
+            title,
             style: labelTitleStyle.copyWith(
               fontSize: 17,
             ),
