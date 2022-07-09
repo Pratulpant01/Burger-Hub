@@ -28,4 +28,9 @@ class UserModel {
       'role': role,
     };
   }
+
+  @override
+  String toString() {
+    return 'UserModel(name: $name, address: $address, phoneNumber: $phoneNumber, role: $role)';
+  }
 }

@@ -1,3 +1,5 @@
+import 'package:burgerhub/widgets/button/secondary_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -6,7 +8,14 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Account Screen'),
+      child: Center(
+        child: secondaryButton(
+          buttonName: 'Log out',
+          onTap: () {
+            FirebaseAuth.instance.signOut();
+          },
+        ),
+      ),
     );
   }
 }

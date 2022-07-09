@@ -1,7 +1,9 @@
+import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
 import 'package:burgerhub/view/auth/services/auth_services.dart';
 import 'package:burgerhub/view/auth/signup_screen.dart';
 import 'package:burgerhub/view/screen_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../constants/constant.dart';
@@ -80,23 +82,30 @@ class SignInScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                secondaryButton(
-                  buttonName: 'Login Now!',
-                  onTap: () async {
-                    String result = await AuthServices().signInUser(
-                      emailController.text,
-                      passwordController.text,
+                BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    return secondaryButton(
+                      buttonName: 'Login Now!',
+                      isLoading: state is AuthBlocLoading ? true : false,
+                      onTap: () async {
+                        context.read<AuthBloc>().add(
+                              loginUserEvent(
+                                emailId: emailController.text,
+                                password: passwordController.text,
+                              ),
+                            );
+                        // if (result == 'Login Sucessfully') {
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => ScreenLayout(),
+                        //     ),
+                        //   );
+                        // } else {
+                        //   print(result);
+                        // }
+                      },
                     );
-                    if (result == 'Login Sucessfully') {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ScreenLayout(),
-                        ),
-                      );
-                    } else {
-                      print(result);
-                    }
                   },
                 ),
                 SizedBox(

@@ -1,7 +1,9 @@
+import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/category_model.dart';
 import 'package:burgerhub/widgets/category_showcase.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/AppBar/app_bar_widget.dart';
@@ -16,6 +18,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userData = BlocProvider.of<AuthBloc>(context).state.userData;
+    print(userData);
     return Scaffold(
       backgroundColor: bgSecondaryColor,
       appBar: AppBarWidget(),

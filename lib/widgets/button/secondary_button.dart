@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import '../../constants/constant.dart';
 
 class secondaryButton extends StatelessWidget {
-  String buttonName;
-  VoidCallback onTap;
+  String? buttonName;
+  VoidCallback? onTap;
+  bool? isLoading;
   secondaryButton({
     Key? key,
-    required this.buttonName,
-    required this.onTap,
+    this.buttonName,
+    this.onTap,
+    this.isLoading = false,
   }) : super(key: key);
 
   @override
@@ -24,12 +26,18 @@ class secondaryButton extends StatelessWidget {
           color: primaryColor,
         ),
         child: Center(
-          child: Text(
-            buttonName,
-            style: productTitleStyle.copyWith(
-              color: Colors.white,
-            ),
-          ),
+          child: isLoading!
+              ? FittedBox(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                )
+              : Text(
+                  buttonName!,
+                  style: productTitleStyle.copyWith(
+                    color: Colors.white,
+                  ),
+                ),
         ),
       ),
     );

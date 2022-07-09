@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
 import 'package:burgerhub/view/auth/services/auth_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:burgerhub/constants/constant.dart';
-import 'package:burgerhub/view/auth/signin_screen.dart';
-import 'package:burgerhub/widgets/button/primary_button.dart';
 
 import '../../widgets/button/secondary_button.dart';
 import '../../widgets/input widgets/textForm_widget.dart';
@@ -119,21 +119,23 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                secondaryButton(
-                  buttonName: 'Register Now!',
-                  onTap: () async {
-                    String result = await AuthServices().registerUser(
-                      emailController.text,
-                      nameController.text,
-                      passwordController.text,
-                      addressController.text,
-                      phoneNumberController.text,
+                BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    return secondaryButton(
+                      buttonName: 'Register Now!',
+                      isLoading: state is AuthBlocLoading ? true : false,
+                      onTap: () async {
+                        context.read<AuthBloc>().add(
+                              registerUserEvent(
+                                emailId: emailController.text,
+                                name: nameController.text,
+                                password: passwordController.text,
+                                address: addressController.text,
+                                phoneNumber: phoneNumberController.text,
+                              ),
+                            );
+                      },
                     );
-                    if (result == 'Registered Sucessfully') {
-                      print('Sucessfull');
-                    } else {
-                      print(result);
-                    }
                   },
                 ),
               ],

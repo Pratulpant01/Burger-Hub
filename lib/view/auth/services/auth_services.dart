@@ -64,4 +64,15 @@ class AuthServices {
     }
     return result;
   }
+
+  Future getUserData() async {
+    DocumentSnapshot<Map<String, dynamic>> userDetails = await firestore
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    UserModel userData = UserModel.fromJson(userDetails.data()!);
+
+    return userData;
+  }
 }
