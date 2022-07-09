@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:burgerhub/widgets/heading_widget.dart';
+import 'package:burgerhub/widgets/input%20widgets/heading_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/product_model.dart';
-import 'package:burgerhub/widgets/app_bar_widget.dart';
+import 'package:burgerhub/widgets/AppBar/app_bar_widget.dart';
 import 'package:burgerhub/widgets/total_rating_widget.dart';
 
 import '../widgets/bottom_sheet_widget.dart';
@@ -46,12 +46,9 @@ class _ProductScreenState extends State<ProductScreen> {
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(50),
               ),
-              child: Hero(
-                tag: 1,
-                child: Image.network(
-                  widget.product.imageUrl,
-                  fit: BoxFit.cover,
-                ),
+              child: Image.network(
+                widget.product.imageUrl,
+                fit: BoxFit.cover,
               ),
             ),
           ),

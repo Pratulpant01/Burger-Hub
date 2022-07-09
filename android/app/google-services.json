@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "187227314788",
+    "project_id": "burgerhub-f65b0",
+    "storage_bucket": "burgerhub-f65b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187227314788:android:9dda3ad1b9a1ca98f75d71",
+        "android_client_info": {
+          "package_name": "com.example.burgerhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187227314788-uscpsihcqhf2urjbh7ut87fkuflfrskk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5Qvy_nWBXpKgUPFP_4RMZiZpDsOAO03E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "187227314788-uscpsihcqhf2urjbh7ut87fkuflfrskk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:burgerhub/screens/product_screen.dart';
+import 'package:burgerhub/view/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -48,12 +48,9 @@ class productCard extends StatelessWidget {
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
                     ),
-                    child: Hero(
-                      tag: 1,
-                      child: Image.network(
-                        product.imageUrl,
-                        fit: BoxFit.cover,
-                      ),
+                    child: Image.network(
+                      product.imageUrl,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

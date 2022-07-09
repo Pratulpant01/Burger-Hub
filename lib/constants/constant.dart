@@ -1,10 +1,10 @@
 import 'package:burgerhub/models/addon_model.dart';
 import 'package:burgerhub/models/category_model.dart';
 import 'package:burgerhub/models/product_model.dart';
-import 'package:burgerhub/screens/account_screen.dart';
-import 'package:burgerhub/screens/cart_screen.dart';
-import 'package:burgerhub/screens/home_screen.dart';
-import 'package:burgerhub/screens/search_screen.dart';
+import 'package:burgerhub/view/account_screen.dart';
+import 'package:burgerhub/view/cart_screen.dart';
+import 'package:burgerhub/view/home_screen.dart';
+import 'package:burgerhub/view/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,8 +16,9 @@ Size screenSize =
 // Colors
 Color primaryColor = Color(0xffE25100);
 Color secondaryColor = Color(0xffEE4D2A);
+Color darkTextColor = Color(0xff482A2A);
 
-Color bgSecondaryColor = Color.fromARGB(255, 247, 243, 243);
+Color bgSecondaryColor = Color(0xFFF7F3F3);
 
 // List for constant values
 
@@ -195,4 +196,8 @@ TextStyle labelTitleStyle = GoogleFonts.anybody(
 TextStyle secondaryTitleStyle = GoogleFonts.asul(
   fontSize: 13,
   fontWeight: FontWeight.w500,
+);
+TextStyle headingStyle = GoogleFonts.alike(
+  fontSize: 18,
+  fontWeight: FontWeight.w400,
 );

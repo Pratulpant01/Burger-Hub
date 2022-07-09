@@ -4,9 +4,9 @@ import 'package:burgerhub/widgets/category_showcase.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../widgets/app_bar_widget.dart';
+import '../widgets/AppBar/app_bar_widget.dart';
 import '../widgets/banner_widget.dart';
-import '../widgets/heading_widget.dart';
+import '../widgets/input widgets/heading_widget.dart';
 import '../widgets/product_card_widget.dart';
 import '../widgets/product_list_case_widget.dart';
 

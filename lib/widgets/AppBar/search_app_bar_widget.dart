@@ -1,5 +1,5 @@
 import 'package:burgerhub/constants/constant.dart';
-import 'package:burgerhub/screens/screen_layout.dart';
+import 'package:burgerhub/view/screen_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
