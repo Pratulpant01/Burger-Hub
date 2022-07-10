@@ -43,6 +43,7 @@ dependencies:
   cloud_firestore: ^3.2.1
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:

@@ -12,6 +12,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 Size screenSize =
     MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
+SizedBox giveMargin = SizedBox(
+  height: screenSize.height * .03,
+);
 
 // Colors
 Color primaryColor = Color(0xffE25100);
@@ -31,12 +34,12 @@ List<Widget> tabOptions = [
 ];
 
 List<CategoryModel> categoriesList = [
-  CategoryModel(name: 'Recommended', categoryId: '01'),
-  CategoryModel(name: 'Veg', categoryId: '02'),
-  CategoryModel(name: 'Non Veg', categoryId: '03'),
-  CategoryModel(name: 'Weekly Crisp', categoryId: '04'),
-  CategoryModel(name: '50% OFF', categoryId: '05'),
-  CategoryModel(name: 'Family Meal', categoryId: '06'),
+  CategoryModel(name: 'Recommended', categoryId: 'Recommended'),
+  CategoryModel(name: 'Veg', categoryId: 'Veg'),
+  CategoryModel(name: 'Non Veg', categoryId: 'Non Veg'),
+  CategoryModel(name: 'Weekly Crisp', categoryId: 'Weekly Crisp'),
+  CategoryModel(name: '50% OFF', categoryId: '50% OFF'),
+  CategoryModel(name: 'Family Meal', categoryId: 'Family Meal'),
 ];
 
 List<ProductModel> products = [

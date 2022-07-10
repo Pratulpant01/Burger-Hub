@@ -1,12 +1,19 @@
-import 'package:burgerhub/constants/constant.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'package:burgerhub/constants/constant.dart';
 
 import '../../view/screen_layout.dart';
 
 class SimpleAppBarWidget extends StatelessWidget with PreferredSizeWidget {
   bool hasBackButton;
-  SimpleAppBarWidget({Key? key, this.hasBackButton = false}) : super(key: key);
+  bool isEnable;
+  SimpleAppBarWidget({
+    Key? key,
+    this.hasBackButton = false,
+    this.isEnable = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,22 +53,39 @@ class SimpleAppBarWidget extends StatelessWidget with PreferredSizeWidget {
               height: screenSize.height * .5,
               fit: BoxFit.cover,
             ),
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ScreenLayout(
-                      selectedIndex: 2,
+            isEnable
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ScreenLayout(
+                            selectedIndex: 0,
+                          ),
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.home_outlined,
+                      color: primaryColor,
+                    ),
+                  )
+                : IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ScreenLayout(
+                            selectedIndex: 2,
+                          ),
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.menu,
+                      color: primaryColor,
                     ),
                   ),
-                );
-              },
-              icon: Icon(
-                Icons.menu,
-                color: primaryColor,
-              ),
-            ),
           ],
         ),
       ),
