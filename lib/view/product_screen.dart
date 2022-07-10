@@ -121,6 +121,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
                   headingWidget(
                     title: 'Add Addons',
+                    isMore: false,
                   ),
                   Container(
                     width: screenSize.width,

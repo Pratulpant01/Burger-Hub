@@ -19,7 +19,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userData = BlocProvider.of<AuthBloc>(context).state.userData;
-    print(userData);
     return Scaffold(
       backgroundColor: bgSecondaryColor,
       appBar: AppBarWidget(),
@@ -43,6 +42,7 @@ class HomeScreen extends StatelessWidget {
             Divider(),
             headingWidget(
               title: 'All Time Favorite ❤️',
+              isMore: true,
             ),
             Container(
               width: screenSize.width,

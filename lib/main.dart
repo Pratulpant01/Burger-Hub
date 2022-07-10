@@ -1,5 +1,7 @@
 import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
+import 'package:burgerhub/view/account_screen.dart';
+import 'package:burgerhub/view/admin/admin_screen.dart';
 import 'package:burgerhub/view/auth/services/auth_services.dart';
 import 'package:burgerhub/view/auth/signin_screen.dart';
 import 'package:burgerhub/view/screen_layout.dart';
@@ -59,7 +61,7 @@ class MyApp extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 } else if (user.hasData) {
-                  return ScreenLayout();
+                  return AdminScreen();
                 } else {
                   return SignInScreen();
                 }

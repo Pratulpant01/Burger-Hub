@@ -5,10 +5,12 @@ import '../../constants/constant.dart';
 
 class headingWidget extends StatelessWidget {
   String title;
+  bool isMore;
 
   headingWidget({
     Key? key,
     required this.title,
+    required this.isMore,
   }) : super(key: key);
 
   @override
@@ -25,12 +27,14 @@ class headingWidget extends StatelessWidget {
               fontSize: 17,
             ),
           ),
-          Text(
-            'See all',
-            style: labelTitleStyle.copyWith(
-              color: primaryColor,
-            ),
-          ),
+          isMore
+              ? Text(
+                  'See all',
+                  style: labelTitleStyle.copyWith(
+                    color: primaryColor,
+                  ),
+                )
+              : Container(),
         ],
       ),
     );
