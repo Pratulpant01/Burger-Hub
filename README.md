@@ -9,12 +9,19 @@ A complete food app using flutter, bloc & firebase.
 1. Login Screen 
 2. Signup screen 
 3. Home Screen
+4. Account Screen
+5. Admin Screen
+6. Add Product Screen
 
 **Features Added**
 
 1. Authentication using Firebase
 2. Login & Registration Added.
-3. 
+3. Add Product Feature
+4. Get user details 
+5. Admin Access
+6. Upload Products using Firebase & BLOC
+
 
 
 
