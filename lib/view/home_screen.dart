@@ -1,7 +1,11 @@
 import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/category_model.dart';
+import 'package:burgerhub/models/product_model.dart';
+import 'package:burgerhub/services/category_services.dart';
 import 'package:burgerhub/widgets/category_showcase.dart';
+import 'package:burgerhub/widgets/input%20widgets/primary_heading_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,17 +32,36 @@ class HomeScreen extends StatelessWidget {
           children: [
             bannerWidget(selectedBanner: selectedBanner),
             categoryShowcase(),
-            Container(
-              height: screenSize.height * .31,
-              child: ListView.builder(
-                  itemCount: 6,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return productCard(
-                      product: products[index],
-                    );
-                  }),
+            giveMargin,
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: primaryHeadingWidget(title: 'Recently Added 🍔')),
             ),
+            Container(
+                height: screenSize.height * .31,
+                child: StreamBuilder(
+                  stream: CategoryServices().getProductsFromDatabase(),
+                  builder: (context,
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snap) {
+                    if (snap.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(color: primaryColor),
+                      );
+                    }
+                    return ListView.builder(
+                        itemCount: 6,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return productCard(
+                            product: ProductModel.fromJson(
+                              snap.data!.docs[index].data(),
+                            ),
+                          );
+                        });
+                  },
+                )),
             Divider(),
             headingWidget(
               title: 'All Time Favorite ❤️',
@@ -46,14 +69,29 @@ class HomeScreen extends StatelessWidget {
             ),
             Container(
               width: screenSize.width,
-              child: ListView.builder(
-                  primary: false,
-                  shrinkWrap: true,
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return ProductListCase(
-                      product: products[index],
-                    );
+              child: StreamBuilder(
+                  stream:
+                      CategoryServices().getProductsByCategories('Recommended'),
+                  builder: (context,
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                          snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: primaryColor,
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                        primary: false,
+                        shrinkWrap: true,
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return ProductListCase(
+                            product: ProductModel.fromJson(
+                                snapshot.data!.docs[index].data()),
+                          );
+                        });
                   }),
             ),
             Container(

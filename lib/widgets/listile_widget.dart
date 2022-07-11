@@ -22,7 +22,7 @@ class ListTileWidget extends StatelessWidget {
           vertical: 5,
         ),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: bgSecondaryColor,
           border: Border(
             bottom: BorderSide(
               color: secondaryColor,

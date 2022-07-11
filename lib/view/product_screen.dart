@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:burgerhub/services/category_services.dart';
 import 'package:burgerhub/widgets/input%20widgets/heading_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +28,11 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,11 +76,15 @@ class _ProductScreenState extends State<ProductScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                        child: Text(
-                          widget.product.productName,
-                          style: secondaryTitleStyle.copyWith(
-                            fontSize: 25,
+                      Flexible(
+                        child: Center(
+                          child: Text(
+                            widget.product.productName,
+                            style: secondaryTitleStyle.copyWith(
+                              fontSize: 25,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ),
@@ -145,7 +155,6 @@ class _ProductScreenState extends State<ProductScreen> {
                                   if (addonList[index].isSelected == true) {
                                     widget.totalPrice += addonList[index].price;
                                   }
-                                  print(widget.totalPrice);
                                 });
                               },
                             ),
@@ -181,7 +190,7 @@ class timeWidget extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(5),
       ),
-      child: Text(widget.product.time),
+      child: Text('${widget.product.time} min'),
     );
   }
 }

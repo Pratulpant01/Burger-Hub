@@ -81,8 +81,8 @@ class SimpleAppBarWidget extends StatelessWidget with PreferredSizeWidget {
                         ),
                       );
                     },
-                    icon: Icon(
-                      Icons.menu,
+                    icon: SvgPicture.asset(
+                      'assets/bag.svg',
                       color: primaryColor,
                     ),
                   ),

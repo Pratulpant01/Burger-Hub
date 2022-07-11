@@ -30,7 +30,7 @@ class ProductModel {
       rating: json['rating'],
       time: json['time'],
       category: json['category'],
-      imageUrl: json['imageUrl'],
+      imageUrl: json['imgUrl'],
       type: json['type'],
     );
   }
@@ -47,6 +47,11 @@ class ProductModel {
       'type': type,
       'imgUrl': imageUrl,
     };
+  }
+
+  @override
+  String toString() {
+    return 'ProductModel(productName: $productName, description: $description, price: $price, productId: $productId, rating: $rating, time: $time, category: $category, imageUrl: $imageUrl, type: $type)';
   }
 }
 

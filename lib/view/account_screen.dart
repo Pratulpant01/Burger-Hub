@@ -73,7 +73,6 @@ class AccountScreen extends StatelessWidget {
                 Expanded(
                   child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: ListView(
@@ -140,6 +139,9 @@ class accountCardWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Colors.grey.shade300,
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -14,8 +14,8 @@ class AdminScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SimpleAppBarWidget(
-        isEnable: false,
-        hasBackButton: false,
+        isEnable: true,
+        hasBackButton: true,
       ),
       body: SingleChildScrollView(
         child: Container(
