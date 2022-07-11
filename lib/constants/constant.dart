@@ -56,7 +56,6 @@ List<ProductModel> products = [
     imageUrl:
         'https://media.istockphoto.com/photos/cheeseburger-with-tomato-and-lettuce-on-wooden-board-picture-id1309352410?b=1&k=20&m=1309352410&s=170667a&w=0&h=YduYl7Us5MSrw1EFSCxR9zDRLnEFa_O608NdqhHlSyM=',
     type: 'Veg',
-    addon: [],
   ),
   ProductModel(
     productName: 'McAloo Tikki Burger',
@@ -71,7 +70,6 @@ List<ProductModel> products = [
     imageUrl:
         'https://images.unsplash.com/photo-1571091655789-405eb7a3a3a8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGJ1cmdlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60',
     type: 'Veg',
-    addon: [],
   ),
   ProductModel(
     productName: 'Pizza McPuff',
@@ -86,7 +84,6 @@ List<ProductModel> products = [
     imageUrl:
         'https://media.istockphoto.com/photos/delicious-homemade-hamburger-and-french-fries-picture-id1254672762?b=1&k=20&m=1254672762&s=170667a&w=0&h=nKrG40G2jj9O8wzJ8wDD2zmUKNp00mcdVWK_f_zixug=',
     type: 'Veg',
-    addon: [],
   ),
   ProductModel(
     productName: 'Heavy Weight Burger',
@@ -101,7 +98,6 @@ List<ProductModel> products = [
     imageUrl:
         'https://media.istockphoto.com/photos/cheese-burger-with-bacon-on-black-dark-background-picture-id1295796202?b=1&k=20&m=1295796202&s=170667a&w=0&h=jqUTXzROq4_Sw4V61-xtn0VDQtpZOXzKUgPLlZx3qs4=',
     type: 'Veg',
-    addon: [],
   ),
   ProductModel(
     productName: 'Chicken Steak Burger',
@@ -116,7 +112,6 @@ List<ProductModel> products = [
     imageUrl:
         'https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YnVyZ2VyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
     type: 'Non Veg',
-    addon: [],
   ),
   ProductModel(
     productName: 'Cheese Chicken Quarter Pounder Burger',
@@ -131,7 +126,6 @@ List<ProductModel> products = [
     imageUrl:
         'https://media.istockphoto.com/photos/closeup-of-a-veggie-burger-with-copy-space-picture-id1331109186?b=1&k=20&m=1331109186&s=170667a&w=0&h=CWqc2DNV-frmE_aqiQu4Q-SfCUmqJIp362drb4cSMZU=',
     type: 'Non Veg',
-    addon: [],
   ),
 ];
 

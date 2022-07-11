@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:burgerhub/models/user_model.dart';

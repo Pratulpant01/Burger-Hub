@@ -10,18 +10,49 @@ class ProductModel {
   List category;
   String imageUrl;
   String type;
-  List addon;
   ProductModel({
     required this.productName,
     required this.description,
     required this.price,
     required this.productId,
-    required this.quantity,
+    this.quantity = 1,
     required this.rating,
     required this.time,
     required this.category,
     required this.imageUrl,
     required this.type,
-    required this.addon,
   });
+
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
+      productName: json['productName'],
+      description: json['description'],
+      price: json['price'],
+      productId: json['productId'],
+      rating: json['rating'],
+      time: json['time'],
+      category: json['category'],
+      imageUrl: json['imageUrl'],
+      type: json['type'],
+    );
+  }
+
+  Map<String, dynamic> getJson() {
+    return {
+      'productName': productName,
+      'description': description,
+      'price': price,
+      'productId': productId,
+      'rating': rating,
+      'time': time,
+      'category': category,
+      'type': type,
+    };
+  }
 }
+
+
+
+//  List addon;
+// quantity
+

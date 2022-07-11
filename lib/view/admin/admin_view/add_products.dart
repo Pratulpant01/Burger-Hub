@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:typed_data';
 
+import 'package:burgerhub/view/admin/services/admin_services.dart';
+import 'package:burgerhub/widgets/button/primary_button.dart';
+import 'package:burgerhub/widgets/button/secondary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,6 +14,7 @@ import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
 import 'package:burgerhub/widgets/input%20widgets/heading_widget.dart';
 import 'package:burgerhub/widgets/input%20widgets/primary_heading_widget.dart';
 
+import '../../../widgets/categoryWidgets/show_selected_category_widget.dart';
 import '../../../widgets/input widgets/secondary_form_widget.dart';
 import '../../../widgets/pick_image_widgets.dart';
 
@@ -25,6 +29,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   TextEditingController productNameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
   List<String> selectedCategories = [];
   String categoryValue = 'Recommended';
   String foodTypeValue = 'Veg';
@@ -39,11 +44,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
         isEnable: true,
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          height: screenSize.height,
+          height: screenSize.height * 1.2,
           width: screenSize.width,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 'Add New Product',
@@ -83,7 +90,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               secondaryFormWidget(
                 heading: 'Time',
                 keyboardType: TextInputType.number,
-                controller: priceController,
+                controller: timeController,
               ),
               giveMargin,
               primaryHeadingWidget(title: 'Enter Category'),
@@ -117,7 +124,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               selectedCategories == null
                   ? Container()
                   : Container(
-                      height: screenSize.width / 9,
+                      height: screenSize.width / 10,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: selectedCategories.length,
@@ -153,52 +160,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     setState(() {
                       foodTypeValue = index!;
                     });
-                  })
+                  }),
+              secondaryButton(
+                buttonName: 'Upload Product',
+                onTap: () {
+                  AdminServices().uploadProductToDatabase(
+                    productName: productNameController.text,
+                    description: descriptionController.text,
+                    price: int.parse(priceController.text),
+                    time: timeController.text,
+                    category: selectedCategories,
+                    type: foodTypeValue,
+                    image: selectedImage!,
+                  );
+                },
+              )
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class showSelectedCategoryWidget extends StatelessWidget {
-  int index = 0;
-  VoidCallback onTap;
-  showSelectedCategoryWidget({
-    Key? key,
-    required this.index,
-    required this.onTap,
-    required this.selectedCategories,
-  }) : super(key: key);
-
-  final List<String> selectedCategories;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: FittedBox(
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 5),
-          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          decoration: BoxDecoration(
-            color: Colors.grey.shade200,
-            border: Border.all(
-              color: Colors.grey,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Center(
-            child: Text(
-              selectedCategories[index],
-              maxLines: 1,
-              style: categoryTitleStyle.copyWith(
-                color: Colors.black,
-                fontSize: 12,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
           ),
         ),
       ),
