@@ -12,7 +12,10 @@ A complete food app using flutter, bloc & firebase.
 4. Account Screen
 5. Admin Screen
 6. Add Product Screen
+<<<<<<< HEAD
 
+=======
+>>>>>>> 08395d2456d84bb40542e5a85fdd69b6b4341a60
 
 **Features Added**
 
@@ -21,7 +24,11 @@ A complete food app using flutter, bloc & firebase.
 3. Add Product Feature
 4. Get user details 
 5. Admin Access
+<<<<<<< HEAD
 6. Upload Products using Bloc
+=======
+6. Upload Products using Firebase & BLOC
+>>>>>>> 08395d2456d84bb40542e5a85fdd69b6b4341a60
 
 
 
