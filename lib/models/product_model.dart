@@ -4,7 +4,6 @@ class ProductModel {
   String description;
   int price;
   String productId;
-  int quantity;
   int rating;
   String time;
   List category;
@@ -15,7 +14,6 @@ class ProductModel {
     required this.description,
     required this.price,
     required this.productId,
-    this.quantity = 1,
     required this.rating,
     required this.time,
     required this.category,
@@ -47,6 +45,7 @@ class ProductModel {
       'time': time,
       'category': category,
       'type': type,
+      'imgUrl': imageUrl,
     };
   }
 }

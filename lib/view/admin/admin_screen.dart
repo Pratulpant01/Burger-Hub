@@ -1,4 +1,5 @@
 import 'package:burgerhub/constants/constant.dart';
+import 'package:burgerhub/view/admin/admin_view/add_categories.dart';
 import 'package:burgerhub/view/admin/admin_view/add_products.dart';
 import 'package:burgerhub/widgets/AppBar/app_bar_widget.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
@@ -99,7 +100,14 @@ class AdminScreen extends StatelessWidget {
                     ListTileWidget(
                       name: 'Add Catergories',
                       icon: Icons.category_outlined,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddCategories(),
+                          ),
+                        );
+                      },
                     ),
                     ListTileWidget(
                       name: 'Add Banners',

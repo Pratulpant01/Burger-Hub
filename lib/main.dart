@@ -1,8 +1,10 @@
 import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
+import 'package:burgerhub/bloc/Product%20Bloc/product_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/view/account_screen.dart';
 import 'package:burgerhub/view/admin/admin_screen.dart';
 import 'package:burgerhub/view/admin/admin_view/add_products.dart';
+import 'package:burgerhub/view/admin/services/admin_services.dart';
 import 'package:burgerhub/view/auth/services/auth_services.dart';
 import 'package:burgerhub/view/auth/signin_screen.dart';
 import 'package:burgerhub/view/screen_layout.dart';
@@ -28,7 +30,10 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider(
           create: (context) => AuthServices(),
-        )
+        ),
+        RepositoryProvider(
+          create: (context) => AdminServices(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -38,9 +43,15 @@ class MyApp extends StatelessWidget {
             ),
           ),
           BlocProvider(
-              create: (context) => AuthBloc(
-                    RepositoryProvider.of<AuthServices>(context),
-                  )..add(getUserDataEvent())),
+            create: (context) => AuthBloc(
+              RepositoryProvider.of<AuthServices>(context),
+            )..add(getUserDataEvent()),
+          ),
+          BlocProvider(
+            create: (context) => ProductBloc(
+              RepositoryProvider.of<AdminServices>(context),
+            ),
+          ),
           // BlocProvider(
           //   create: (context) => AuthBloc(
           //     RepositoryProvider.of<AuthServices>(context),
@@ -62,7 +73,7 @@ class MyApp extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 } else if (user.hasData) {
-                  return AddProductScreen();
+                  return AdminScreen();
                 } else {
                   return SignInScreen();
                 }

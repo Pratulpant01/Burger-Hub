@@ -16,6 +16,7 @@ class AdminServices {
     UploadTask uploadFile = storageRef.putData(image);
     TaskSnapshot taskSnapshot = await uploadFile;
     Future<String> imageUrl = taskSnapshot.ref.getDownloadURL();
+
     return imageUrl;
   }
 
@@ -30,16 +31,17 @@ class AdminServices {
   }) async {
     String result = 'Something went wrong';
 
-    if (productName != null &&
-        description != null &&
+    if (productName != '' &&
+        description != '' &&
         price != null &&
-        time != null &&
-        category != null &&
-        type != null &&
-        image != null) {
+        time != '' &&
+        category != '' &&
+        type != '' &&
+        image.isNotEmpty) {
       String productId = Uuid().v1();
-      final imgUrl =
+      String imgUrl =
           await AdminServices().uploadImageToStorage(image, productId);
+
       ProductModel product = ProductModel(
         productName: productName,
         description: description,

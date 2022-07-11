@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:typed_data';
 
+import 'package:burgerhub/bloc/Product%20Bloc/product_bloc.dart';
 import 'package:burgerhub/view/admin/services/admin_services.dart';
 import 'package:burgerhub/widgets/button/primary_button.dart';
 import 'package:burgerhub/widgets/button/secondary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -35,6 +37,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
   String foodTypeValue = 'Veg';
 
   Uint8List? selectedImage;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    productNameController.dispose();
+    priceController.dispose();
+    descriptionController.dispose();
+    timeController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,17 +173,43 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       foodTypeValue = index!;
                     });
                   }),
-              secondaryButton(
-                buttonName: 'Upload Product',
-                onTap: () {
-                  AdminServices().uploadProductToDatabase(
-                    productName: productNameController.text,
-                    description: descriptionController.text,
-                    price: int.parse(priceController.text),
-                    time: timeController.text,
-                    category: selectedCategories,
-                    type: foodTypeValue,
-                    image: selectedImage!,
+              BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  if (state is ProductUploading) {
+                    return secondaryButton(
+                      isLoading: true,
+                      buttonName: 'Uploading..',
+                      onTap: () {},
+                    );
+                  }
+
+                  return secondaryButton(
+                    buttonName: 'Upload Product',
+                    onTap: () {
+                      context.read<ProductBloc>().add(
+                            uploadProductEvent(
+                              productName: productNameController.text,
+                              description: descriptionController.text,
+                              price: priceController.text.isEmpty
+                                  ? 0
+                                  : int.parse(priceController.text),
+                              time: timeController.text,
+                              category: selectedCategories,
+                              type: foodTypeValue,
+                              image: selectedImage!,
+                              context: context,
+                            ),
+                          );
+                      if (state is ProductUploaded) {
+                        setState(() {
+                          productNameController.clear();
+                          priceController.clear();
+                          timeController.clear();
+                          descriptionController.clear();
+                          selectedCategories.clear();
+                        });
+                      }
+                    },
                   );
                 },
               )

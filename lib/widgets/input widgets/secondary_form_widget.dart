@@ -21,7 +21,10 @@ class secondaryFormWidget extends StatelessWidget {
         children: [
           primaryHeadingWidget(title: heading),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            margin: EdgeInsets.symmetric(
+              vertical: 10,
+            ),
             decoration: BoxDecoration(
               border: Border.all(
                 color: Colors.grey.shade400,
