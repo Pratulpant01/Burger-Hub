@@ -62,7 +62,7 @@ class AccountScreen extends StatelessWidget {
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               return productCard(
-                                product: products[index],
+                                product: demoProducts[index],
                               );
                             }),
                       ),

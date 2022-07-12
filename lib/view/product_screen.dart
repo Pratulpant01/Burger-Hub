@@ -16,7 +16,6 @@ import '../widgets/food widgets/food_type_widget.dart';
 
 class ProductScreen extends StatefulWidget {
   ProductModel product;
-  int totalPrice = 0;
   bool checkedValue = false;
   ProductScreen({
     Key? key,
@@ -29,14 +28,13 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    int totalPrice = widget.product.price;
+
     return Scaffold(
-      bottomSheet: bottomSheet_widget(),
+      bottomSheet: bottomSheet_widget(
+        price: totalPrice,
+      ),
       appBar: AppBarWidget(
         hasBackButton: true,
       ),
@@ -153,7 +151,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 setState(() {
                                   addonList[index].isSelected = value!;
                                   if (addonList[index].isSelected == true) {
-                                    widget.totalPrice += addonList[index].price;
+                                    totalPrice += addonList[index].price;
                                   }
                                 });
                               },

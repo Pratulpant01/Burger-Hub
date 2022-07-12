@@ -24,3 +24,5 @@ class uploadProductEvent extends ProductEvent {
     required this.image,
   });
 }
+
+class getProductsEvent extends ProductEvent {}

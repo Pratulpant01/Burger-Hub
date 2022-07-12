@@ -1,9 +1,13 @@
-import 'package:burgerhub/constants/constant.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-class primaryButton extends StatelessWidget {
-  const primaryButton({
+import 'package:burgerhub/constants/constant.dart';
+
+class priceButton extends StatelessWidget {
+  int price;
+  priceButton({
     Key? key,
+    required this.price,
   }) : super(key: key);
 
   @override
@@ -21,7 +25,7 @@ class primaryButton extends StatelessWidget {
         height: screenSize.width * .14,
         child: Center(
           child: Text(
-            'Add Item ₹150',
+            'Add Item $price',
             style: productDescriptionStyle.copyWith(
               color: Colors.white,
               fontSize: 15,

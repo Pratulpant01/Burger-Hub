@@ -42,7 +42,7 @@ List<CategoryModel> categoriesList = [
   CategoryModel(name: 'Family Meal', categoryId: 'Family Meal'),
 ];
 
-List<ProductModel> products = [
+List<ProductModel> demoProducts = [
   ProductModel(
     productName: 'Veg Cheese Burger',
     description:

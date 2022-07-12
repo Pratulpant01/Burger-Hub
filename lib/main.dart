@@ -1,6 +1,7 @@
 import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
 import 'package:burgerhub/bloc/Product%20Bloc/product_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
+import 'package:burgerhub/services/category_services.dart';
 import 'package:burgerhub/view/account_screen.dart';
 import 'package:burgerhub/view/admin/admin_screen.dart';
 import 'package:burgerhub/view/admin/admin_view/add_products.dart';
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) => AdminServices(),
         ),
+        RepositoryProvider(
+          create: (context) => CategoryServices(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -47,10 +51,11 @@ class MyApp extends StatelessWidget {
               RepositoryProvider.of<AuthServices>(context),
             )..add(getUserDataEvent()),
           ),
+
           BlocProvider(
             create: (context) => ProductBloc(
-              RepositoryProvider.of<AdminServices>(context),
-            ),
+              RepositoryProvider.of<CategoryServices>(context),
+            )..add(getProductsEvent()),
           ),
           // BlocProvider(
           //   create: (context) => AuthBloc(

@@ -19,7 +19,9 @@ class ProductListCase extends StatelessWidget {
       onTap: () {
         showBottomSheet(
           context: context,
-          builder: (context) => bottomSheet_widget(),
+          builder: (context) => bottomSheet_widget(
+            price: product.price,
+          ),
         );
       },
       child: Column(

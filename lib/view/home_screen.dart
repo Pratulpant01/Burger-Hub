@@ -1,4 +1,5 @@
 import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
+import 'package:burgerhub/bloc/Product%20Bloc/product_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/category_model.dart';
 import 'package:burgerhub/models/product_model.dart';
@@ -39,29 +40,34 @@ class HomeScreen extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: primaryHeadingWidget(title: 'Recently Added 🍔')),
             ),
-            Container(
-                height: screenSize.height * .31,
-                child: StreamBuilder(
-                  stream: CategoryServices().getProductsFromDatabase(),
-                  builder: (context,
-                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snap) {
-                    if (snap.connectionState == ConnectionState.waiting) {
-                      return Center(
-                        child: CircularProgressIndicator(color: primaryColor),
-                      );
-                    }
-                    return ListView.builder(
-                        itemCount: 6,
+            BlocBuilder<ProductBloc, ProductState>(
+              builder: (context, state) {
+                if (state is ProductLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: primaryColor,
+                    ),
+                  );
+                } else if (state is ProductLoaded) {
+                  print(state.products);
+                  return Container(
+                    height: screenSize.height * .31,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: 4,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return productCard(
-                            product: ProductModel.fromJson(
-                              snap.data!.docs[index].data(),
-                            ),
+                            product: state.products[index],
                           );
-                        });
-                  },
-                )),
+                        }),
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            ),
             Divider(),
             headingWidget(
               title: 'All Time Favorite ❤️',
@@ -85,7 +91,7 @@ class HomeScreen extends StatelessWidget {
                     return ListView.builder(
                         primary: false,
                         shrinkWrap: true,
-                        itemCount: 5,
+                        itemCount: 4,
                         itemBuilder: (context, index) {
                           return ProductListCase(
                             product: ProductModel.fromJson(

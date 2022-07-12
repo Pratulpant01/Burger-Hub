@@ -32,10 +32,8 @@ class CategoryServices {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getProductsFromDatabase() {
-    // List<ProductModel> productList = [];
     Stream<QuerySnapshot<Map<String, dynamic>>> snapshot =
         firestore.collection('products').snapshots();
-
     return snapshot;
   }
 

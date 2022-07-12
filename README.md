@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # burgerhub
 
 A complete food app using flutter, bloc & firebase.
@@ -12,10 +10,7 @@ A complete food app using flutter, bloc & firebase.
 4. Account Screen
 5. Admin Screen
 6. Add Product Screen
-<<<<<<< HEAD
 
-=======
->>>>>>> 08395d2456d84bb40542e5a85fdd69b6b4341a60
 
 **Features Added**
 
@@ -24,11 +19,7 @@ A complete food app using flutter, bloc & firebase.
 3. Add Product Feature
 4. Get user details 
 5. Admin Access
-<<<<<<< HEAD
-6. Upload Products using Bloc
-=======
 6. Upload Products using Firebase & BLOC
->>>>>>> 08395d2456d84bb40542e5a85fdd69b6b4341a60
 
 
 
@@ -38,13 +29,3 @@ A complete food app using flutter, bloc & firebase.
 ## Getting Started
 
 This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
->>>>>>> 3ea4b49faa7d5f0acadbbfb56a0d94e85cd25d89
