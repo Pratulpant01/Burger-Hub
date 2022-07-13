@@ -20,6 +20,8 @@ A complete food app using flutter, bloc & firebase.
 4. Get user details 
 5. Admin Access
 6. Upload Products using Firebase & BLOC
+7. Get products from Firestore using Bloc & stream subscription
+
 
 
 
