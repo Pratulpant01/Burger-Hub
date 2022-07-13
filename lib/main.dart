@@ -9,6 +9,7 @@ import 'package:burgerhub/view/admin/admin_view/add_products.dart';
 import 'package:burgerhub/view/admin/services/admin_services.dart';
 import 'package:burgerhub/view/auth/services/auth_services.dart';
 import 'package:burgerhub/view/auth/signin_screen.dart';
+import 'package:burgerhub/view/cart_screen.dart';
 import 'package:burgerhub/view/screen_layout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -84,7 +85,7 @@ class MyApp extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 } else if (user.hasData) {
-                  return ScreenLayout();
+                  return CartScreen();
                 } else {
                   return SignInScreen();
                 }

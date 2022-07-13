@@ -6,7 +6,7 @@ import 'package:burgerhub/widgets/total_rating_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../view/product_screen.dart';
+import '../view/product/product_screen.dart';
 import 'input widgets/heading_widget.dart';
 
 class ProductListCase extends StatelessWidget {

@@ -45,7 +45,7 @@ class SimpleAppBarWidget extends StatelessWidget with PreferredSizeWidget {
                     },
                     icon: Icon(
                       Icons.add,
-                      color: primaryColor,
+                      color: bgSecondaryColor,
                     ),
                   ),
             Image.asset(

@@ -6,11 +6,13 @@ import '../../constants/constant.dart';
 class headingWidget extends StatelessWidget {
   String title;
   bool isMore;
+  VoidCallback? onTap;
 
   headingWidget({
     Key? key,
     required this.title,
     required this.isMore,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -28,10 +30,13 @@ class headingWidget extends StatelessWidget {
             ),
           ),
           isMore
-              ? Text(
-                  'See all',
-                  style: labelTitleStyle.copyWith(
-                    color: primaryColor,
+              ? GestureDetector(
+                  onTap: onTap,
+                  child: Text(
+                    'See all',
+                    style: labelTitleStyle.copyWith(
+                      color: primaryColor,
+                    ),
                   ),
                 )
               : Container(),

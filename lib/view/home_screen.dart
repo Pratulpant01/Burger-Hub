@@ -1,15 +1,14 @@
 import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
 import 'package:burgerhub/bloc/Product%20Bloc/product_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
-import 'package:burgerhub/models/category_model.dart';
 import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/services/category_services.dart';
+import 'package:burgerhub/view/product/see_more_product_screen.dart';
 import 'package:burgerhub/widgets/category_showcase.dart';
 import 'package:burgerhub/widgets/input%20widgets/primary_heading_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/AppBar/app_bar_widget.dart';
 import '../widgets/banner_widget.dart';
@@ -44,7 +43,21 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.only(left: 10),
               child: Align(
                   alignment: Alignment.centerLeft,
-                  child: primaryHeadingWidget(title: 'Recently Added 🍔')),
+                  child: headingWidget(
+                    title: 'Recently Added 🍔',
+                    isMore: true,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SeeMoreProductScreen(
+                            categoryName: '',
+                            showProducts: true,
+                          ),
+                        ),
+                      );
+                    },
+                  )),
             ),
             BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
@@ -75,6 +88,15 @@ class _HomeScreenState extends State<HomeScreen> {
             headingWidget(
               title: 'All Time Favorite ❤️',
               isMore: true,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        SeeMoreProductScreen(categoryName: 'Recommended'),
+                  ),
+                );
+              },
             ),
             Container(
               width: screenSize.width,
@@ -98,7 +120,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           return ProductListCase(
                             product: ProductModel.fromJson(
-                                snapshot.data!.docs[index].data()),
+                              snapshot.data!.docs[index].data(),
+                            ),
                           );
                         });
                   }),

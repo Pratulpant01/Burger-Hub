@@ -8,11 +8,11 @@ import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/widgets/AppBar/app_bar_widget.dart';
 import 'package:burgerhub/widgets/total_rating_widget.dart';
 
-import '../widgets/bottom_sheet_widget.dart';
-import '../widgets/button/add_quantity_widget.dart';
-import '../widgets/button/primary_button.dart';
-import '../widgets/button/round_button.dart';
-import '../widgets/food widgets/food_type_widget.dart';
+import '../../widgets/bottom_sheet_widget.dart';
+import '../../widgets/button/add_quantity_widget.dart';
+import '../../widgets/button/primary_button.dart';
+import '../../widgets/button/round_button.dart';
+import '../../widgets/food widgets/food_type_widget.dart';
 
 class ProductScreen extends StatefulWidget {
   ProductModel product;

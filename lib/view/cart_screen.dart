@@ -1,3 +1,4 @@
+import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatelessWidget {
@@ -5,8 +6,9 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Cart Screen'),
+    return Scaffold(
+      appBar: SimpleAppBarWidget(),
+      body: Text('Cart Screen'),
     );
   }
 }
