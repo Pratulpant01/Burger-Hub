@@ -17,9 +17,15 @@ import '../widgets/input widgets/heading_widget.dart';
 import '../widgets/product_card_widget.dart';
 import '../widgets/product_list_case_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  int selectedBanner = 0;
+class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int selectedBanner = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +55,10 @@ class HomeScreen extends StatelessWidget {
                     ),
                   );
                 } else if (state is ProductLoaded) {
-                  print(state.products);
                   return Container(
                     height: screenSize.height * .31,
                     child: ListView.builder(
-                        shrinkWrap: true,
-                        primary: false,
-                        itemCount: 4,
+                        itemCount: state.products.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return productCard(

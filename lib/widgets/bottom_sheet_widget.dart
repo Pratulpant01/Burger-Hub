@@ -24,6 +24,7 @@ class bottomSheet_widget extends StatelessWidget {
         children: [
           addQuantityWidget(),
           priceButton(
+            quantity: 1,
             price: price,
           ),
         ],

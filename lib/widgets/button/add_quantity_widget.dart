@@ -12,7 +12,7 @@ class addQuantityWidget extends StatefulWidget {
 }
 
 class _addQuantityWidgetState extends State<addQuantityWidget> {
-  int value = 0;
+  int value = 1;
 
   @override
   Widget build(BuildContext context) {

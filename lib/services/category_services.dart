@@ -37,6 +37,10 @@ class CategoryServices {
     return snapshot;
   }
 
+  Stream<QuerySnapshot> getProducts() async* {
+    yield* firestore.collection('products').snapshots();
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> getProductsByCategories(
       String categoryName) {
     Stream<QuerySnapshot<Map<String, dynamic>>> snapshot = firestore

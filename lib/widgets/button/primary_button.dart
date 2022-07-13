@@ -5,9 +5,11 @@ import 'package:burgerhub/constants/constant.dart';
 
 class priceButton extends StatelessWidget {
   int price;
+  int quantity;
   priceButton({
     Key? key,
     required this.price,
+    required this.quantity,
   }) : super(key: key);
 
   @override
@@ -25,7 +27,7 @@ class priceButton extends StatelessWidget {
         height: screenSize.width * .14,
         child: Center(
           child: Text(
-            'Add Item $price',
+            'Add Item  ₹$price',
             style: productDescriptionStyle.copyWith(
               color: Colors.white,
               fontSize: 15,

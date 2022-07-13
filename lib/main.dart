@@ -1,3 +1,4 @@
+import 'package:burgerhub/bloc/Admin%20Bloc/admin_bloc.dart';
 import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
 import 'package:burgerhub/bloc/Product%20Bloc/product_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
@@ -47,16 +48,21 @@ class MyApp extends StatelessWidget {
             ),
           ),
           BlocProvider(
-            create: (context) => AuthBloc(
-              RepositoryProvider.of<AuthServices>(context),
-            )..add(getUserDataEvent()),
-          ),
-
-          BlocProvider(
             create: (context) => ProductBloc(
               RepositoryProvider.of<CategoryServices>(context),
             )..add(getProductsEvent()),
           ),
+          BlocProvider(
+            create: (context) => AuthBloc(
+              RepositoryProvider.of<AuthServices>(context),
+            )..add(getUserDataEvent()),
+          ),
+          BlocProvider(
+            create: (context) => AdminBloc(
+              RepositoryProvider.of<AdminServices>(context),
+            ),
+          ),
+
           // BlocProvider(
           //   create: (context) => AuthBloc(
           //     RepositoryProvider.of<AuthServices>(context),

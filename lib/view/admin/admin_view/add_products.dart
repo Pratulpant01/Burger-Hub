@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:typed_data';
 
+import 'package:burgerhub/bloc/Admin%20Bloc/admin_bloc.dart';
 import 'package:burgerhub/bloc/Product%20Bloc/product_bloc.dart';
 import 'package:burgerhub/view/admin/services/admin_services.dart';
 import 'package:burgerhub/widgets/button/primary_button.dart';
@@ -122,13 +123,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   setState(() {
                     categoryValue = index!;
                   });
-                  print(index);
                   if (!selectedCategories.contains(index)) {
                     setState(() {
                       selectedCategories.add(index!);
                     });
                   } else {
-                    print('Already added');
+                    Utils().showSnackBar(
+                        context: context, message: 'Already added');
                   }
                 },
               ),
@@ -173,7 +174,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       foodTypeValue = index!;
                     });
                   }),
-              BlocBuilder<ProductBloc, ProductState>(
+              BlocBuilder<AdminBloc, AdminState>(
                 builder: (context, state) {
                   if (state is ProductUploading) {
                     return secondaryButton(
@@ -186,7 +187,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   return secondaryButton(
                     buttonName: 'Upload Product',
                     onTap: () {
-                      context.read<ProductBloc>().add(
+                      context.read<AdminBloc>().add(
                             uploadProductEvent(
                               productName: productNameController.text,
                               description: descriptionController.text,

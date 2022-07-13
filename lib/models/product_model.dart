@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class ProductModel {
+import 'package:equatable/equatable.dart';
+
+class ProductModel extends Equatable {
   String productName;
   String description;
   int price;
@@ -52,6 +54,21 @@ class ProductModel {
   @override
   String toString() {
     return 'ProductModel(productName: $productName, description: $description, price: $price, productId: $productId, rating: $rating, time: $time, category: $category, imageUrl: $imageUrl, type: $type)';
+  }
+
+  @override
+  List<Object> get props {
+    return [
+      productName,
+      description,
+      price,
+      productId,
+      rating,
+      time,
+      category,
+      imageUrl,
+      type,
+    ];
   }
 }
 
