@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 } else if (user.hasData) {
-                  return CartScreen();
+                  return ScreenLayout();
                 } else {
                   return SignInScreen();
                 }
