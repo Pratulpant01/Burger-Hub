@@ -17,7 +17,7 @@ import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
 import 'package:burgerhub/widgets/input%20widgets/heading_widget.dart';
 import 'package:burgerhub/widgets/input%20widgets/primary_heading_widget.dart';
 
-import '../../../widgets/categoryWidgets/show_selected_category_widget.dart';
+import '../../../widgets/Category/show_selected_category_widget.dart';
 import '../../../widgets/input widgets/secondary_form_widget.dart';
 import '../../../widgets/pick_image_widgets.dart';
 

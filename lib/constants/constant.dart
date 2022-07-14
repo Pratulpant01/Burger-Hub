@@ -23,6 +23,7 @@ Color darkTextColor = Color(0xff482A2A);
 Color descriptionTextColor = Color(0xff38393F);
 
 Color bgSecondaryColor = Color(0xFFF7F3F3);
+Color bluePrimaryColor = Color.fromARGB(255, 0, 112, 203);
 
 // List for constant values
 
@@ -136,27 +137,27 @@ List<AddOnModel> addonList = [
   AddOnModel(
     addonName: 'Paneer',
     price: 50,
-    isSelected: false,
+    id: 'ajas',
   ),
   AddOnModel(
     addonName: 'Cheese Slice',
     price: 30,
-    isSelected: false,
+    id: 'ajas',
   ),
   AddOnModel(
     addonName: 'Corn',
     price: 30,
-    isSelected: false,
+    id: 'ajas',
   ),
   AddOnModel(
     addonName: 'Sauce',
     price: 2,
-    isSelected: false,
+    id: 'ajas',
   ),
   AddOnModel(
     addonName: 'Extra Tikki',
     price: 50,
-    isSelected: false,
+    id: 'ajas',
   ),
 ];
 

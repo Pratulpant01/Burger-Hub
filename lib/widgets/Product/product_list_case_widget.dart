@@ -2,12 +2,12 @@ import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/widgets/bottom_sheet_widget.dart';
 import 'package:burgerhub/widgets/food%20widgets/food_type_widget.dart';
-import 'package:burgerhub/widgets/total_rating_widget.dart';
+import 'package:burgerhub/widgets/Product/total_rating_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../view/product/product_screen.dart';
-import 'input widgets/heading_widget.dart';
+import '../../view/product/product_screen.dart';
+import '../input widgets/heading_widget.dart';
 
 class ProductListCase extends StatelessWidget {
   ProductModel product;

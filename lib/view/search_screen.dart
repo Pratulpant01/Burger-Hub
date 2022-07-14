@@ -3,7 +3,7 @@ import 'package:burgerhub/widgets/AppBar/app_bar_widget.dart';
 import 'package:burgerhub/widgets/AppBar/search_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/product_card_widget.dart';
+import '../widgets/Product/product_card_widget.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);

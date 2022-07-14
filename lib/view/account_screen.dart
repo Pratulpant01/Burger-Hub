@@ -12,9 +12,9 @@ import 'package:burgerhub/widgets/AppBar/app_bar_widget.dart';
 import 'package:burgerhub/widgets/AppBar/search_app_bar_widget.dart';
 import 'package:burgerhub/widgets/button/secondary_button.dart';
 import 'package:burgerhub/widgets/input%20widgets/heading_widget.dart';
-import 'package:burgerhub/widgets/product_card_widget.dart';
+import 'package:burgerhub/widgets/Product/product_card_widget.dart';
 
-import '../widgets/listile_widget.dart';
+import '../widgets/Product/listile_widget.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);

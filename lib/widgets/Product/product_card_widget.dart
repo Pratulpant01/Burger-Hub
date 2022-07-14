@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/product_model.dart';
-import 'package:burgerhub/widgets/total_rating_widget.dart';
+import 'package:burgerhub/widgets/Product/total_rating_widget.dart';
 
 class productCard extends StatelessWidget {
   ProductModel product;

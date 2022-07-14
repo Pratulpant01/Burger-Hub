@@ -4,7 +4,7 @@ import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/services/category_services.dart';
 import 'package:burgerhub/view/product/see_more_product_screen.dart';
-import 'package:burgerhub/widgets/category_showcase.dart';
+import 'package:burgerhub/widgets/Category/category_showcase.dart';
 import 'package:burgerhub/widgets/input%20widgets/primary_heading_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/AppBar/app_bar_widget.dart';
 import '../widgets/banner_widget.dart';
 import '../widgets/input widgets/heading_widget.dart';
-import '../widgets/product_card_widget.dart';
-import '../widgets/product_list_case_widget.dart';
+import '../widgets/Product/product_card_widget.dart';
+import '../widgets/Product/product_list_case_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);

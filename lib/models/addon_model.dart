@@ -2,13 +2,14 @@
 class AddOnModel {
   String addonName;
   int price;
-  bool isSelected;
+  String id;
   AddOnModel({
     required this.addonName,
     required this.price,
-    required this.isSelected,
+    required this.id,
   });
 
   @override
-  String toString() => 'AddOnModel(addonName: $addonName, price: $price, isSelected: $isSelected)';
+  String toString() =>
+      'AddOnModel(addonName: $addonName, price: $price, isSelected: $id)';
 }

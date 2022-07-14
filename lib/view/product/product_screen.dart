@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/widgets/AppBar/app_bar_widget.dart';
-import 'package:burgerhub/widgets/total_rating_widget.dart';
+import 'package:burgerhub/widgets/Product/total_rating_widget.dart';
 
+import '../../widgets/Product/time_widget.dart';
 import '../../widgets/bottom_sheet_widget.dart';
 import '../../widgets/button/add_quantity_widget.dart';
 import '../../widgets/button/primary_button.dart';
@@ -16,7 +17,7 @@ import '../../widgets/food widgets/food_type_widget.dart';
 
 class ProductScreen extends StatefulWidget {
   ProductModel product;
-  bool checkedValue = false;
+  List<bool> isChecked = List<bool>.filled(addonList.length, false);
   ProductScreen({
     Key? key,
     required this.product,
@@ -94,21 +95,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   SizedBox(
                     height: screenSize.height * .02,
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 10,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        totalRatingWidget(
-                          size: 15,
-                        ),
-                        timeWidget(widget: widget),
-                      ],
-                    ),
-                  ),
+                  TimeRatingWidget(widget: widget),
                   Flexible(
                     flex: 0,
                     child: Center(
@@ -146,13 +133,10 @@ class _ProductScreenState extends State<ProductScreen> {
                                     labelTitleStyle.copyWith(color: Colors.red),
                               ),
                               title: Text(addonList[index].addonName),
-                              value: addonList[index].isSelected,
+                              value: widget.isChecked[index],
                               onChanged: (value) {
                                 setState(() {
-                                  addonList[index].isSelected = value!;
-                                  if (addonList[index].isSelected == true) {
-                                    totalPrice += addonList[index].price;
-                                  }
+                                  widget.isChecked[index] = value!;
                                 });
                               },
                             ),
@@ -170,8 +154,8 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 }
 
-class timeWidget extends StatelessWidget {
-  const timeWidget({
+class TimeRatingWidget extends StatelessWidget {
+  const TimeRatingWidget({
     Key? key,
     required this.widget,
   }) : super(key: key);
@@ -181,14 +165,19 @@ class timeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.red,
-        ),
-        borderRadius: BorderRadius.circular(5),
+      margin: EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 10,
       ),
-      child: Text('${widget.product.time} min'),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          totalRatingWidget(
+            size: 15,
+          ),
+          timeWidget(widget: widget),
+        ],
+      ),
     );
   }
 }

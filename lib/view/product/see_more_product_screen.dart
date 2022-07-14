@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/services/category_services.dart';
-import 'package:burgerhub/widgets/product_card_widget.dart';
+import 'package:burgerhub/widgets/Product/product_card_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

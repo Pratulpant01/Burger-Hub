@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/widgets/button/round_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class addQuantityWidget extends StatefulWidget {
   bool isMargin;
@@ -33,7 +35,7 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
           IconButton(
             onPressed: () {
               setState(() {
-                value--;
+                context.read<AddQuantityBloc>().add(DecrementQuantityEvent());
               });
             },
             icon: Icon(
@@ -41,23 +43,29 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
               color: secondaryColor,
             ),
           ),
-          FittedBox(
-            child: Container(
-              child: Center(
-                child: Text(
-                  '$value',
-                  style: TextStyle(
-                    color: secondaryColor,
-                    fontSize: 20,
-                  ),
-                ),
+          Builder(builder: (context) {
+            return FittedBox(
+              child: BlocBuilder<AddQuantityBloc, AddQuantityState>(
+                builder: (context, state) {
+                  return Container(
+                    child: Center(
+                      child: Text(
+                        '${state.quantity}',
+                        style: TextStyle(
+                          color: secondaryColor,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
-            ),
-          ),
+            );
+          }),
           IconButton(
             onPressed: () {
               setState(() {
-                value++;
+                context.read<AddQuantityBloc>().add(IncrementQuantityEvent());
               });
             },
             icon: Icon(

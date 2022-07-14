@@ -4,7 +4,7 @@ import 'package:burgerhub/view/admin/admin_view/add_products.dart';
 import 'package:burgerhub/widgets/AppBar/app_bar_widget.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
 import 'package:burgerhub/widgets/input%20widgets/heading_widget.dart';
-import 'package:burgerhub/widgets/listile_widget.dart';
+import 'package:burgerhub/widgets/Product/listile_widget.dart';
 import 'package:flutter/material.dart';
 
 class AdminScreen extends StatelessWidget {
