@@ -10,6 +10,7 @@ A complete food app using flutter, bloc & firebase.
 4. Account Screen
 5. Admin Screen
 6. Add Product Screen
+7. Cart Screen 
 
 
 **Features Added**
