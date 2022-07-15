@@ -9,7 +9,7 @@ class CartModel {
   List category;
   String imageUrl;
   String type;
-  String quantity;
+  int quantity;
   int totalPrice;
   List addonList;
   CartModel({

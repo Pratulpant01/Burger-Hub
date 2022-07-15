@@ -22,3 +22,11 @@ class ProductLoaded extends ProductState {
   @override
   List<Object?> get props => [products];
 }
+
+class SelectedProductLoad extends ProductState {
+  ProductModel? selectedProduct;
+  SelectedProductLoad(this.selectedProduct);
+
+  @override
+  List<Object?> get props => [selectedProduct];
+}

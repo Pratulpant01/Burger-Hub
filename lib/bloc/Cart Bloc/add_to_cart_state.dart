@@ -12,3 +12,10 @@ class AddToCartInitial extends AddToCartState {}
 class UploadProductsToCartLoading extends AddToCartState {}
 
 class UploadProductsToCartLoaded extends AddToCartState {}
+
+class getQuantityState extends AddToCartState {
+  int value;
+  getQuantityState({
+    required this.value,
+  });
+}

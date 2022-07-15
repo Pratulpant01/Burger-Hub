@@ -1,11 +1,12 @@
+import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
 import 'package:burgerhub/bloc/Admin%20Bloc/admin_bloc.dart';
 import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
+import 'package:burgerhub/bloc/Cart%20Bloc/add_to_cart_bloc.dart';
 import 'package:burgerhub/bloc/Product%20Bloc/product_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/services/category_services.dart';
-import 'package:burgerhub/view/account_screen.dart';
 import 'package:burgerhub/view/admin/admin_screen.dart';
-import 'package:burgerhub/view/admin/admin_view/add_products.dart';
+import 'package:burgerhub/view/admin/admin_view/add_addons.dart';
 import 'package:burgerhub/view/admin/services/admin_services.dart';
 import 'package:burgerhub/view/auth/services/auth_services.dart';
 import 'package:burgerhub/view/auth/signin_screen.dart';
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) => CategoryServices(),
         ),
+        RepositoryProvider(
+          create: (context) => AddQuantityBloc(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -61,6 +65,14 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => AdminBloc(
               RepositoryProvider.of<AdminServices>(context),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => AddQuantityBloc(),
+          ),
+          BlocProvider(
+            create: (context) => AddToCartBloc(
+              RepositoryProvider.of<AddQuantityBloc>(context),
             ),
           ),
 
@@ -85,7 +97,7 @@ class MyApp extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 } else if (user.hasData) {
-                  return ScreenLayout();
+                  return AddAddons();
                 } else {
                   return SignInScreen();
                 }

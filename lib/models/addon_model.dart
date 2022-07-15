@@ -11,5 +11,5 @@ class AddOnModel {
 
   @override
   String toString() =>
-      'AddOnModel(addonName: $addonName, price: $price, isSelected: $id)';
+      'AddOnModel(addonName: $addonName, price: $price, id: $id)';
 }

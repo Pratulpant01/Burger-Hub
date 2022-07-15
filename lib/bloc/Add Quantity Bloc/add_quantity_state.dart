@@ -8,7 +8,7 @@ abstract class AddQuantityState extends Equatable {
   );
 
   @override
-  List<Object> get props => [quantity];
+  List<Object> get props => [];
 }
 
 class AddQuantityInitial extends AddQuantityState {

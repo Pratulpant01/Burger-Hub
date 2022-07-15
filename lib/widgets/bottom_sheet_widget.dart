@@ -25,10 +25,7 @@ class bottomSheet_widget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          BlocProvider(
-            create: (context) => AddQuantityBloc(),
-            child: addQuantityWidget(),
-          ),
+          addQuantityWidget(),
           priceButton(
             quantity: 1,
             price: price,

@@ -43,6 +43,18 @@ List<CategoryModel> categoriesList = [
   CategoryModel(name: 'Family Meal', categoryId: 'Family Meal'),
 ];
 
+ProductModel emptyModel = ProductModel(
+  productName: '',
+  description: '',
+  price: 0,
+  productId: 'A',
+  rating: 5,
+  time: '0 min',
+  category: [''],
+  imageUrl: '',
+  type: '',
+);
+
 List<ProductModel> demoProducts = [
   ProductModel(
     productName: 'Veg Cheese Burger',

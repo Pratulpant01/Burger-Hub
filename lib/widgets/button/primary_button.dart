@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:burgerhub/constants/constant.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../bloc/Add Quantity Bloc/add_quantity_bloc.dart';
 
 class priceButton extends StatelessWidget {
   int price;
@@ -15,22 +18,29 @@ class priceButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: 10,
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        height: screenSize.width * .14,
-        child: Center(
-          child: Text(
-            'Add Item  ₹$price',
-            style: productDescriptionStyle.copyWith(
-              color: Colors.white,
-              fontSize: 15,
+      child: GestureDetector(
+        onTap: () {
+          int quantity =
+              BlocProvider.of<AddQuantityBloc>(context).state.quantity;
+          print(quantity);
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: 10,
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          height: screenSize.width * .14,
+          child: Center(
+            child: Text(
+              'Add Item  ₹$price',
+              style: productDescriptionStyle.copyWith(
+                color: Colors.white,
+                fontSize: 15,
+              ),
             ),
           ),
         ),

@@ -10,15 +10,22 @@ part 'add_to_cart_event.dart';
 part 'add_to_cart_state.dart';
 
 class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
-  AddToCartBloc addToCartBloc;
+  AddQuantityBloc addQuantityBloc;
   StreamSubscription? quantitySubscription;
-  AddToCartBloc(this.addToCartBloc) : super(AddToCartInitial()) {
-    quantitySubscription = addToCartBloc.stream.listen((state) {
-      if (state is AddQuantityLoaded) {
-        print(state.);
-      }
+  AddToCartBloc(this.addQuantityBloc) : super(AddToCartInitial()) {
+    on<getQuantity>((event, emit) async {
+      int? value;
+      quantitySubscription = addQuantityBloc.stream.listen((state) {
+        value = state.quantity;
+        emit(getQuantityState(value: value!));
+      });
     });
 
-    on<uploadProductToCartEvent>((event, emit) {});
+    @override
+    Future<void> close() {
+      quantitySubscription!.cancel();
+
+      return super.close();
+    }
   }
 }

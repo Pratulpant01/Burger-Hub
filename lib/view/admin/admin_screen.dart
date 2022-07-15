@@ -1,4 +1,5 @@
 import 'package:burgerhub/constants/constant.dart';
+import 'package:burgerhub/view/admin/admin_view/add_addons.dart';
 import 'package:burgerhub/view/admin/admin_view/add_categories.dart';
 import 'package:burgerhub/view/admin/admin_view/add_products.dart';
 import 'package:burgerhub/widgets/AppBar/app_bar_widget.dart';
@@ -117,7 +118,14 @@ class AdminScreen extends StatelessWidget {
                     ListTileWidget(
                       name: 'Add Addons',
                       icon: Icons.fastfood_outlined,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddAddons(),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
