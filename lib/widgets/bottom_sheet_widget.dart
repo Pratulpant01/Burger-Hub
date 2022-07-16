@@ -35,7 +35,6 @@ class bottomSheet_widget extends StatelessWidget {
             product: product,
             selectedAddon: selectedAddon,
             quantity: 1,
-            price: price,
           ),
         ],
       ),

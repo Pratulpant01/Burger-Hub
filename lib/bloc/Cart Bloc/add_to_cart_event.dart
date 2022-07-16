@@ -8,6 +8,13 @@ abstract class AddToCartEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class uploadProductToCartEvent extends AddToCartEvent {}
-
-class getQuantity extends AddToCartEvent {}
+class uploadProductToCartEvent extends AddToCartEvent {
+  ProductModel product;
+  List selectedAddons;
+  int quantity;
+  uploadProductToCartEvent({
+    required this.product,
+    required this.selectedAddons,
+    required this.quantity,
+  });
+}

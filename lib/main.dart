@@ -45,6 +45,9 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) => AddQuantityBloc(),
         ),
+        RepositoryProvider(
+          create: (context) => CartServices(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -73,7 +76,6 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => AddToCartBloc(
-              RepositoryProvider.of<AddQuantityBloc>(context),
               RepositoryProvider.of<CartServices>(context),
             ),
           ),

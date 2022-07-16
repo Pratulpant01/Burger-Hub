@@ -1,4 +1,7 @@
 import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,64 +30,87 @@ class CartProductsWidget extends StatelessWidget {
           ),
           Container(
             width: screenSize.width,
-            child: ListView.builder(
-                itemCount: 5,
-                shrinkWrap: true,
-                primary: false,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // foodTypeWidget(foodtype: 'Veg'),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Container(
-                                height: 50,
-                                width: 50,
-                                child: Image.network(
-                                    'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1599&q=80'),
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: screenSize.width / 2.5,
-                                  child: Text(
-                                    'Max Veg Burger jajnsj asjnasj asjkjsasan jakkjs',
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: productTitleStyle.copyWith(
-                                      fontWeight: FontWeight.w600,
+            child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .collection('cart')
+                    .snapshots(),
+                builder: (context,
+                    AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                        snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      shrinkWrap: true,
+                      primary: false,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  // foodTypeWidget(foodtype: 'Veg'),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Container(
+                                      height: 50,
+                                      width: 50,
+                                      child: Image.network(
+                                        snapshot.data!.docs[index]
+                                            .data()['imageUrl'],
+                                        fit: BoxFit.cover,
+                                        alignment: Alignment.centerLeft,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: screenSize.width * .02,
-                                ),
-                                Text(
-                                  'Rs 220',
-                                  style: productPricingStyle.copyWith(
-                                      fontSize: 12),
-                                ),
-                              ],
-                            ),
-                            Transform.scale(
-                              scale: 0.6,
-                              child: BlocProvider(
-                                create: (context) => AddQuantityBloc(),
-                                child: addQuantityWidget(),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: screenSize.width / 2.5,
+                                        child: Text(
+                                          snapshot.data!.docs[index]
+                                              .data()['productName'],
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: productTitleStyle.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: screenSize.width * .02,
+                                      ),
+                                      Text(
+                                        '₹${snapshot.data!.docs[index].data()['price']}',
+                                        style: productPricingStyle.copyWith(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Transform.scale(
+                                    scale: 0.6,
+                                    child: BlocProvider(
+                                      create: (context) => AddQuantityBloc(),
+                                      child: addQuantityWidget(),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
+                            ],
+                          ),
+                        );
+                      });
                 }),
           )
         ],

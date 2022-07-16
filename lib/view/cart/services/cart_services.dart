@@ -39,12 +39,9 @@ class CartServices {
     return totalAddonPrice;
   }
 
-  Future addProductToCart(ProductModel product, int quantity, List addons,
-      int totalAddonPrice) async {
+  Future addProductToCart(
+      ProductModel product, int quantity, List addons, int totalPrice) async {
     String userId = firebaseAuth.currentUser!.uid;
-
-    int totalPrice = await CartServices()
-        .getTotalPrice(product.price, quantity, totalAddonPrice);
 
     CartModel cartProduct = CartModel(
       productName: product.productName,
