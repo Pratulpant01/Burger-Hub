@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
+import 'package:burgerhub/models/addon_model.dart';
 import 'package:burgerhub/models/cart_model.dart';
 import 'package:burgerhub/models/product_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,16 +12,39 @@ class CartServices {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  int getTotalPrice(int price, int quantity) {
-    int totalPrice = price * quantity;
+  int getTotalPrice(int price, int quantity, int totalAddonPrice) {
+    int totalPrice = (price * quantity) + totalAddonPrice;
 
     return totalPrice;
   }
 
-  Future addProductToCart(
-      ProductModel product, int quantity, List addons) async {
+// Problem yaha pe hai
+
+  Future<int> getAddonPrice(List selectedAddons) async {
+    int totalAddonPrice = 0;
+
+    for (String addon in selectedAddons) {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
+          .collection('addons')
+          .where('addonName', isEqualTo: addon)
+          .get();
+
+      snapshot.docs.forEach((snap) async {
+        AddOnModel addon = AddOnModel.fromJson(snap.data());
+        int price = addon.price;
+        totalAddonPrice = totalAddonPrice + price;
+      });
+    }
+
+    return totalAddonPrice;
+  }
+
+  Future addProductToCart(ProductModel product, int quantity, List addons,
+      int totalAddonPrice) async {
     String userId = firebaseAuth.currentUser!.uid;
-    int totalPrice = CartServices().getTotalPrice(product.price, quantity);
+
+    int totalPrice = await CartServices()
+        .getTotalPrice(product.price, quantity, totalAddonPrice);
 
     CartModel cartProduct = CartModel(
       productName: product.productName,

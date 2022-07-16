@@ -7,8 +7,11 @@ import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/widgets/Product/total_rating_widget.dart';
 
+import '../../view/product/services/product_services.dart';
+
 class productCard extends StatelessWidget {
   ProductModel product;
+
   productCard({
     Key? key,
     required this.product,
@@ -21,7 +24,9 @@ class productCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProductScreen(product: product),
+            builder: (context) => ProductScreen(
+              product: product,
+            ),
           ),
         );
       },

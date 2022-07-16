@@ -1,7 +1,10 @@
 import 'package:burgerhub/constants/constant.dart';
+import 'package:burgerhub/models/addon_model.dart';
+import 'package:burgerhub/view/admin/services/admin_services.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
 import 'package:burgerhub/widgets/button/secondary_button.dart';
 import 'package:burgerhub/widgets/input%20widgets/textForm_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AddAddons extends StatelessWidget {
@@ -20,7 +23,7 @@ class AddAddons extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 10),
-          height: screenSize.height / 2,
+          height: screenSize.height,
           width: screenSize.width,
           child: Column(
             children: [
@@ -53,9 +56,52 @@ class AddAddons extends StatelessWidget {
               ),
               secondaryButton(
                 buttonName: 'Publish Addons',
-                onTap: () => () {},
+                onTap: () async {
+                  String result = await AdminServices().uploadAddonsToDatabase(
+                    AddOnModel(
+                      addonName: _nameController.text,
+                      price: int.parse(_priceController.text),
+                      id: _idController.text,
+                    ),
+                  );
+                  if (result == 'Addon added sucessfully') {
+                    print(result);
+                  } else {
+                    print(result);
+                  }
+                },
               ),
               Divider(),
+              Container(
+                width: screenSize.width,
+                child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('addons')
+                        .snapshots(),
+                    builder: (context,
+                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                            snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(color: primaryColor),
+                        );
+                      }
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          primary: false,
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              leading:
+                                  Text(snapshot.data!.docs[index].data()['id']),
+                              title: Text(snapshot.data!.docs[index]
+                                  .data()['addonName']),
+                              trailing: Text(
+                                  '₹${snapshot.data!.docs[index].data()['price']}'),
+                            );
+                          });
+                    }),
+              )
             ],
           ),
         ),

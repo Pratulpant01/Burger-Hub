@@ -9,6 +9,22 @@ class AddOnModel {
     required this.id,
   });
 
+  factory AddOnModel.fromJson(Map<String, dynamic> json) {
+    return AddOnModel(
+      addonName: json['addonName'],
+      price: json['price'],
+      id: json['id'],
+    );
+  }
+
+  Map<String, dynamic> getJson() {
+    return {
+      'addonName': addonName,
+      'price': price,
+      'id': id,
+    };
+  }
+
   @override
   String toString() =>
       'AddOnModel(addonName: $addonName, price: $price, id: $id)';

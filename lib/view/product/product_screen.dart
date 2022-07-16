@@ -2,7 +2,9 @@
 import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
 import 'package:burgerhub/bloc/Cart%20Bloc/add_to_cart_bloc.dart';
 import 'package:burgerhub/services/category_services.dart';
+import 'package:burgerhub/view/product/services/product_services.dart';
 import 'package:burgerhub/widgets/input%20widgets/heading_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -20,15 +22,16 @@ import '../../widgets/button/round_button.dart';
 import '../../widgets/food widgets/food_type_widget.dart';
 
 class ProductScreen extends StatefulWidget {
-  addQuantityWidget addq = addQuantityWidget();
   List selectedAddons = [];
 
+  List addonList = [];
+  List<bool>? isChecked;
+
   ProductModel product;
-  List<bool> isChecked = List<bool>.filled(addonList.length, false);
   ProductScreen({
     Key? key,
     required this.product,
-  }) : super(key: key);
+  }) : this.isChecked = List<bool>.filled(5, false);
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -36,11 +39,26 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   @override
+  void initState() {
+    getAddons();
+
+    super.initState();
+  }
+
+  getAddons() async {
+    List addons = await ProductServices().getAddons();
+    setState(() {
+      widget.addonList = addons;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     int totalPrice = widget.product.price;
-
     return Scaffold(
       bottomSheet: bottomSheet_widget(
+        selectedAddon: widget.selectedAddons,
+        product: widget.product,
         price: totalPrice,
       ),
       appBar: AppBarWidget(
@@ -130,27 +148,27 @@ class _ProductScreenState extends State<ProductScreen> {
                     child: ListView.builder(
                         primary: false,
                         shrinkWrap: true,
-                        itemCount: addonList.length,
+                        itemCount: widget.addonList.length,
                         itemBuilder: (context, index) {
                           return Container(
                             child: CheckboxListTile(
                               subtitle: Text(
-                                '₹${addonList[index].price}',
+                                '₹${widget.addonList[index].price}',
                                 style:
                                     labelTitleStyle.copyWith(color: Colors.red),
                               ),
-                              title: Text(addonList[index].addonName),
-                              value: widget.isChecked[index],
+                              title: Text(widget.addonList[index].addonName),
+                              value: widget.isChecked![index],
                               onChanged: (value) {
                                 setState(() {
-                                  widget.isChecked[index] = value!;
-                                  if (widget.isChecked[index] == true) {
+                                  widget.isChecked![index] = value!;
+                                  if (widget.isChecked![index] == true) {
                                     widget.selectedAddons
-                                        .add(addonList[index].addonName);
+                                        .add(widget.addonList[index].addonName);
                                   }
-                                  if (widget.isChecked[index] == false) {
-                                    widget.selectedAddons
-                                        .remove(addonList[index].addonName);
+                                  if (widget.isChecked![index] == false) {
+                                    widget.selectedAddons.remove(
+                                        widget.addonList[index].addonName);
                                   }
                                   print(widget.selectedAddons);
                                 });

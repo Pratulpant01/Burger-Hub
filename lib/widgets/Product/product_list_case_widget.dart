@@ -17,12 +17,12 @@ class ProductListCase extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showBottomSheet(
-          context: context,
-          builder: (context) => bottomSheet_widget(
-            price: product.price,
-          ),
-        );
+        // showBottomSheet(
+        //   context: context,
+        //   builder: (context) => bottomSheet_widget(
+        //     price: product.price,
+        //   ),
+        // );
       },
       child: Column(
         children: [

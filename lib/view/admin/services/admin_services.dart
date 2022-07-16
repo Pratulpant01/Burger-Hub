@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:burgerhub/models/addon_model.dart';
 import 'package:burgerhub/models/product_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -61,6 +62,17 @@ class AdminServices {
       result = 'Product Uploaded Sucessfully';
     } else {
       result = 'Please enter all the required fields';
+    }
+    return result;
+  }
+
+  Future<String> uploadAddonsToDatabase(AddOnModel addon) async {
+    String result = 'Something went wrong';
+    if (addon != null) {
+      await firestore.collection('addons').doc(addon.id).set(addon.getJson());
+      result = 'Addon added sucessfully';
+    } else {
+      result = 'Please try again later';
     }
     return result;
   }

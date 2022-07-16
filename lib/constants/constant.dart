@@ -145,33 +145,33 @@ List bannerImages = [
   'https://burgerking-image.s3.amazonaws.com/products/Home/web/1x_web_20211006080239254637_1440x300jpg',
 ];
 
-List<AddOnModel> addonList = [
-  AddOnModel(
-    addonName: 'Paneer',
-    price: 50,
-    id: 'ajas',
-  ),
-  AddOnModel(
-    addonName: 'Cheese Slice',
-    price: 30,
-    id: 'ajas',
-  ),
-  AddOnModel(
-    addonName: 'Corn',
-    price: 30,
-    id: 'ajas',
-  ),
-  AddOnModel(
-    addonName: 'Sauce',
-    price: 2,
-    id: 'ajas',
-  ),
-  AddOnModel(
-    addonName: 'Extra Tikki',
-    price: 50,
-    id: 'ajas',
-  ),
-];
+// List<AddOnModel> addonList = [
+//   AddOnModel(
+//     addonName: 'Paneer',
+//     price: 50,
+//     id: 'ajas',
+//   ),
+//   AddOnModel(
+//     addonName: 'Cheese Slice',
+//     price: 30,
+//     id: 'ajas',
+//   ),
+//   AddOnModel(
+//     addonName: 'Corn',
+//     price: 30,
+//     id: 'ajas',
+//   ),
+//   AddOnModel(
+//     addonName: 'Sauce',
+//     price: 2,
+//     id: 'ajas',
+//   ),
+//   AddOnModel(
+//     addonName: 'Extra Tikki',
+//     price: 50,
+//     id: 'ajas',
+//   ),
+// ];
 
 // TextStyle Constants
 
