@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:burgerhub/demo.dart';
 import 'package:burgerhub/view/admin/admin_screen.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -96,7 +97,14 @@ class AccountScreen extends StatelessWidget {
                           ListTileWidget(
                             name: 'Send Feedback',
                             icon: Icons.feedback_outlined,
-                            onTap: () {},
+                            onTap: () {
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => MainScreenWidget(),
+                              //   ),
+                              // );
+                            },
                           ),
                           ListTileWidget(
                             name: 'Help',

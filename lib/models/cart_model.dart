@@ -49,7 +49,7 @@ class CartModel {
       'productName': productName,
       'description': description,
       'price': price,
-      'produtId': productId,
+      'productId': productId,
       'rating': rating,
       'time': time,
       'category': category,

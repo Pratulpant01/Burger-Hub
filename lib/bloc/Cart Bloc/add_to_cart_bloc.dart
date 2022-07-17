@@ -13,10 +13,9 @@ part 'add_to_cart_state.dart';
 
 class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
   CartServices cartServices;
-  AddToCartBloc(this.cartServices) : super(AddToCartInitial()) {
+  AddToCartBloc(this.cartServices) : super(AddToCartLoading()) {
     on<uploadProductToCartEvent>(
       (event, emit) async {
-        emit(UploadProductsToCartLoading());
         int addonPrice = await cartServices.getAddonPrice(event.selectedAddons);
         int totalPrice = cartServices.getTotalPrice(
             event.product.price, event.quantity, addonPrice);

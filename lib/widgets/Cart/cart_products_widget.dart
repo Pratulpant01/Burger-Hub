@@ -1,4 +1,5 @@
 import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
+import 'package:burgerhub/widgets/Cart/cart_quantity_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -100,9 +101,9 @@ class CartProductsWidget extends StatelessWidget {
                                   ),
                                   Transform.scale(
                                     scale: 0.6,
-                                    child: BlocProvider(
-                                      create: (context) => AddQuantityBloc(),
-                                      child: addQuantityWidget(),
+                                    child: addQuantityWidget(
+                                      productId: snapshot.data!.docs[index]
+                                          .data()['productId'],
                                     ),
                                   ),
                                 ],

@@ -6,8 +6,6 @@ abstract class AddToCartState extends Equatable {
   List<Object> get props => [];
 }
 
-class AddToCartInitial extends AddToCartState {}
-
-class UploadProductsToCartLoading extends AddToCartState {}
+class AddToCartLoading extends AddToCartState {}
 
 class UploadProductsToCartLoaded extends AddToCartState {}

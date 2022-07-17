@@ -11,6 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 class CartServices {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  String userId = FirebaseAuth.instance.currentUser!.uid;
 
   int getTotalPrice(int price, int quantity, int totalAddonPrice) {
     int totalPrice = (price * quantity) + totalAddonPrice;
@@ -64,5 +65,32 @@ class CartServices {
         .collection('cart')
         .doc(product.productId)
         .set(cartProduct.getJson());
+  }
+
+  Future<int> updateQuantity(int quantity, String productId) async {
+    await firestore
+        .collection('users')
+        .doc(userId)
+        .collection('cart')
+        .doc(productId)
+        .update({
+      'quantity': quantity,
+    });
+    return quantity;
+  }
+
+  Future<bool> checkProductinCart(String productId) async {
+    bool isProductinCart = false;
+    QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
+        .collection('users')
+        .doc(userId)
+        .collection('cart')
+        .where('productId', isEqualTo: productId)
+        .get();
+    if (snapshot.docs.isNotEmpty) {
+      isProductinCart = true;
+    }
+    print(isProductinCart);
+    return isProductinCart;
   }
 }

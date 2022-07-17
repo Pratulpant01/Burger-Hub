@@ -19,7 +19,7 @@ import '../../widgets/button/primary_button.dart';
 class CartScreen extends StatelessWidget {
   ProductModel? product;
   bool addonList = false;
-  CartScreen({Key? key}) : super(key: key);
+  CartScreen({Key? key, this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

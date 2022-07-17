@@ -7,24 +7,21 @@ import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/widgets/button/round_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class addQuantityWidget extends StatefulWidget {
+class addQuantityWidget extends StatelessWidget {
   bool isMargin;
+  String productId;
   addQuantityWidget({
     Key? key,
     this.isMargin = false,
+    required this.productId,
   }) : super(key: key);
 
-  @override
-  State<addQuantityWidget> createState() => _addQuantityWidgetState();
-}
-
-class _addQuantityWidgetState extends State<addQuantityWidget> {
   int value = 1;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: widget.isMargin ? null : EdgeInsets.symmetric(horizontal: 10),
+      margin: isMargin ? null : EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
           color: Colors.red.withOpacity(0.1),
           border: Border.all(
@@ -35,9 +32,9 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
         children: [
           IconButton(
             onPressed: () {
-              setState(() {
-                context.read<AddQuantityBloc>().add(DecrementQuantityEvent());
-              });
+              context
+                  .read<AddQuantityBloc>()
+                  .add(DecrementQuantityEvent(productId));
             },
             icon: Icon(
               Icons.remove,
@@ -51,7 +48,7 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
                   return Container(
                     child: Center(
                       child: Text(
-                        '${state.quantity}',
+                        state.quantity.toString(),
                         style: TextStyle(
                           color: secondaryColor,
                           fontSize: 20,
@@ -65,9 +62,9 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
           }),
           IconButton(
             onPressed: () {
-              setState(() {
-                context.read<AddQuantityBloc>().add(IncrementQuantityEvent());
-              });
+              context
+                  .read<AddQuantityBloc>()
+                  .add(IncrementQuantityEvent(productId));
             },
             icon: Icon(
               Icons.add,

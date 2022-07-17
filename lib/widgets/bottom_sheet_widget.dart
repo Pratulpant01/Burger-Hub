@@ -30,7 +30,9 @@ class bottomSheet_widget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          addQuantityWidget(),
+          addQuantityWidget(
+            productId: product.productId,
+          ),
           priceButton(
             product: product,
             selectedAddon: selectedAddon,

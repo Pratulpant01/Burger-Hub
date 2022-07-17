@@ -36,7 +36,7 @@ class _cartQuantityWidgetState extends State<cartQuantityWidget> {
           IconButton(
             onPressed: () {
               setState(() {
-                context.read<AddQuantityBloc>().add(DecrementQuantityEvent());
+                // context.read<AddQuantityBloc>().add(DecrementQuantityEvent());
               });
             },
             icon: Icon(
@@ -66,7 +66,7 @@ class _cartQuantityWidgetState extends State<cartQuantityWidget> {
           IconButton(
             onPressed: () {
               setState(() {
-                context.read<AddQuantityBloc>().add(IncrementQuantityEvent());
+                // context.read<AddQuantityBloc>().add(IncrementQuantityEvent());
               });
             },
             icon: Icon(

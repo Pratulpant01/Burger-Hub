@@ -3,18 +3,16 @@ part of 'add_quantity_bloc.dart';
 
 abstract class AddQuantityState extends Equatable {
   int quantity;
-  AddQuantityState(
-    this.quantity,
-  );
+  AddQuantityState({required this.quantity});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [quantity];
 }
 
 class AddQuantityInitial extends AddQuantityState {
-  AddQuantityInitial(super.quantity);
+  AddQuantityInitial() : super(quantity: 1);
 }
 
 class AddQuantityLoaded extends AddQuantityState {
-  AddQuantityLoaded(super.quantity);
+  AddQuantityLoaded({required super.quantity});
 }

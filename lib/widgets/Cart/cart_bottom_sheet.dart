@@ -5,7 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class cartBottomSheet extends StatelessWidget {
-  const cartBottomSheet({
+  int totalPrice = 0;
+  cartBottomSheet({
     Key? key,
   }) : super(key: key);
 
@@ -36,21 +37,23 @@ class cartBottomSheet extends StatelessWidget {
                       .collection('users')
                       .doc(FirebaseAuth.instance.currentUser!.uid)
                       .collection('cart')
-                      .doc('24abe880-0154-11ed-a92b-791984e8f678')
                       .snapshots(),
                   builder: (context,
-                      AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                           snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(
                         child: CircularProgressIndicator(),
                       );
                     }
-                    String price =
-                        snapshot.data!.data()!['totalPrice'].toString();
+                    snapshot.data!.docs.forEach((snap) {
+                      int price = snap.data()['totalPrice'];
+                      totalPrice += price;
+                    });
+                    print(totalPrice.toString());
                     return Center(
                       child: Text(
-                        'Proceed To Checkout ₹${price}',
+                        'Proceed To Checkout ₹' + totalPrice.toString(),
                         style: productDescriptionStyle.copyWith(
                           color: Colors.white,
                           fontSize: 15,
