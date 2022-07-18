@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'add_quantity_bloc.dart';
 
 abstract class AddQuantityEvent extends Equatable {
@@ -9,9 +10,17 @@ abstract class AddQuantityEvent extends Equatable {
 }
 
 class IncrementQuantityEvent extends AddQuantityEvent {
-  IncrementQuantityEvent(super.productId);
+  int? quantity;
+  IncrementQuantityEvent(
+    this.quantity,
+    super.productId,
+  );
 }
 
 class DecrementQuantityEvent extends AddQuantityEvent {
-  DecrementQuantityEvent(super.productId);
+  int? quantity;
+  DecrementQuantityEvent(
+    this.quantity,
+    super.productId,
+  );
 }

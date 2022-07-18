@@ -5,10 +5,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class cartBottomSheet extends StatelessWidget {
-  int totalPrice = 0;
   cartBottomSheet({
     Key? key,
   }) : super(key: key);
+
+  int totalPrice = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +47,17 @@ class cartBottomSheet extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       );
                     }
-                    snapshot.data!.docs.forEach((snap) {
-                      int price = snap.data()['totalPrice'];
-                      totalPrice += price;
-                    });
+                    if (totalPrice == 0) {
+                      snapshot.data!.docs.forEach((snap) {
+                        int price = snap.data()['totalPrice'];
+                        totalPrice += price;
+                      });
+                    } else {
+                      snapshot.data!.docs.forEach((snap) {
+                        int price = snap.data()['totalPrice'];
+                        totalPrice += price;
+                      });
+                    }
                     print(totalPrice.toString());
                     return Center(
                       child: Text(

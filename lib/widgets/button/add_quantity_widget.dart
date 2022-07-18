@@ -1,13 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
+import 'package:burgerhub/view/cart/services/cart_services.dart';
 import 'package:burgerhub/view/product/product_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/widgets/button/round_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class addQuantityWidget extends StatelessWidget {
+class addQuantityWidget extends StatefulWidget {
   bool isMargin;
   String productId;
   addQuantityWidget({
@@ -16,12 +20,17 @@ class addQuantityWidget extends StatelessWidget {
     required this.productId,
   }) : super(key: key);
 
+  @override
+  State<addQuantityWidget> createState() => _addQuantityWidgetState();
+}
+
+class _addQuantityWidgetState extends State<addQuantityWidget> {
   int value = 1;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: isMargin ? null : EdgeInsets.symmetric(horizontal: 10),
+      margin: widget.isMargin ? null : EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
           color: Colors.red.withOpacity(0.1),
           border: Border.all(
@@ -32,9 +41,15 @@ class addQuantityWidget extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              context
-                  .read<AddQuantityBloc>()
-                  .add(DecrementQuantityEvent(productId));
+              setState(() {
+                if (value >= 1) {
+                  value--;
+
+                  context
+                      .read<AddQuantityBloc>()
+                      .add(DecrementQuantityEvent(value, widget.productId));
+                }
+              });
             },
             icon: Icon(
               Icons.remove,
@@ -43,28 +58,46 @@ class addQuantityWidget extends StatelessWidget {
           ),
           Builder(builder: (context) {
             return FittedBox(
-              child: BlocBuilder<AddQuantityBloc, AddQuantityState>(
-                builder: (context, state) {
-                  return Container(
-                    child: Center(
-                      child: Text(
-                        state.quantity.toString(),
-                        style: TextStyle(
-                          color: secondaryColor,
-                          fontSize: 20,
+              child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .collection('cart')
+                      .doc(widget.productId)
+                      .snapshots(),
+                  builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: Container(),
+                      );
+                    }
+                    if (snapshot.data!.exists == true) {
+                      value = snapshot.data!['quantity'];
+                    }
+                    return Container(
+                      child: Center(
+                        child: Text(
+                          value.toString(),
+                          style: TextStyle(
+                            color: secondaryColor,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-              ),
+                    );
+                  }),
             );
           }),
           IconButton(
             onPressed: () {
-              context
-                  .read<AddQuantityBloc>()
-                  .add(IncrementQuantityEvent(productId));
+              if (value <= 10) {
+                setState(() {
+                  value++;
+                  context
+                      .read<AddQuantityBloc>()
+                      .add(IncrementQuantityEvent(value, widget.productId));
+                });
+              }
             },
             icon: Icon(
               Icons.add,

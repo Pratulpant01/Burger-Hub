@@ -9,11 +9,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../constants/constant.dart';
 import '../button/add_quantity_widget.dart';
 
-class CartProductsWidget extends StatelessWidget {
+class CartProductsWidget extends StatefulWidget {
   const CartProductsWidget({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<CartProductsWidget> createState() => _CartProductsWidgetState();
+}
+
+class _CartProductsWidgetState extends State<CartProductsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
