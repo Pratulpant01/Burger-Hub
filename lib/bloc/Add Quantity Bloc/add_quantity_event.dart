@@ -2,8 +2,8 @@
 part of 'add_quantity_bloc.dart';
 
 abstract class AddQuantityEvent extends Equatable {
-  String productId;
-  AddQuantityEvent(this.productId);
+  ProductModel product;
+  AddQuantityEvent(this.product);
 
   @override
   List<Object> get props => [];
@@ -13,7 +13,7 @@ class IncrementQuantityEvent extends AddQuantityEvent {
   int? quantity;
   IncrementQuantityEvent(
     this.quantity,
-    super.productId,
+    super.product,
   );
 }
 
@@ -21,6 +21,6 @@ class DecrementQuantityEvent extends AddQuantityEvent {
   int? quantity;
   DecrementQuantityEvent(
     this.quantity,
-    super.productId,
+    super.product,
   );
 }

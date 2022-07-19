@@ -27,7 +27,7 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
           totalPrice,
         );
 
-        UploadProductsToCartLoaded();
+        emit(UploadProductsToCartLoaded());
       },
     );
   }

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
+import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/view/cart/services/cart_services.dart';
 import 'package:burgerhub/view/product/product_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,11 +14,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class addQuantityWidget extends StatefulWidget {
   bool isMargin;
-  String productId;
+  ProductModel product;
   addQuantityWidget({
     Key? key,
     this.isMargin = false,
-    required this.productId,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -47,7 +48,7 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
 
                   context
                       .read<AddQuantityBloc>()
-                      .add(DecrementQuantityEvent(value, widget.productId));
+                      .add(DecrementQuantityEvent(value, widget.product));
                 }
               });
             },
@@ -57,24 +58,17 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
             ),
           ),
           Builder(builder: (context) {
-            return FittedBox(
-              child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .collection('cart')
-                      .doc(widget.productId)
-                      .snapshots(),
-                  builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
-                        child: Container(),
-                      );
-                    }
-                    if (snapshot.data!.exists == true) {
-                      value = snapshot.data!['quantity'];
-                    }
+            return StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .collection('cart')
+                    .doc(widget.product.productId)
+                    .snapshots(),
+                builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
                     return Container(
+                      height: screenSize.height * .05,
                       child: Center(
                         child: Text(
                           value.toString(),
@@ -85,8 +79,23 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
                         ),
                       ),
                     );
-                  }),
-            );
+                  }
+                  if (snapshot.data!.exists == true) {
+                    value = snapshot.data!['quantity'];
+                  }
+                  return Container(
+                    height: screenSize.height * .05,
+                    child: Center(
+                      child: Text(
+                        value.toString(),
+                        style: TextStyle(
+                          color: secondaryColor,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  );
+                });
           }),
           IconButton(
             onPressed: () {
@@ -95,7 +104,7 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
                   value++;
                   context
                       .read<AddQuantityBloc>()
-                      .add(IncrementQuantityEvent(value, widget.productId));
+                      .add(IncrementQuantityEvent(value, widget.product));
                 });
               }
             },

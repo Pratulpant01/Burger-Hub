@@ -76,6 +76,7 @@ class CartServices {
         .update({
       'quantity': quantity,
     });
+
     return quantity;
   }
 
@@ -92,5 +93,26 @@ class CartServices {
     }
     print(isProductinCart);
     return isProductinCart;
+  }
+
+  Future updatePriceinCart(int price, String productId, int quantity) async {
+    int totalPrice = price * quantity;
+    await firestore
+        .collection('users')
+        .doc(userId)
+        .collection('cart')
+        .doc(productId)
+        .update({
+      'totalPrice': totalPrice,
+    });
+  }
+
+  Future updateCartProduct(int quantity, ProductModel product) async {
+    await CartServices().updateQuantity(quantity, product.productId);
+    await CartServices().updatePriceinCart(
+      product.price,
+      product.productId,
+      quantity,
+    );
   }
 }

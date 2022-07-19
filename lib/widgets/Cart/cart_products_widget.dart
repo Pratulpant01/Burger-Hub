@@ -1,4 +1,6 @@
 import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
+import 'package:burgerhub/models/cart_model.dart';
+import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/widgets/Cart/cart_quantity_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,6 +52,7 @@ class _CartProductsWidgetState extends State<CartProductsWidget> {
                       child: CircularProgressIndicator(),
                     );
                   }
+
                   return ListView.builder(
                       itemCount: snapshot.data!.docs.length,
                       shrinkWrap: true,
@@ -71,9 +74,9 @@ class _CartProductsWidgetState extends State<CartProductsWidget> {
                                       width: 50,
                                       child: Image.network(
                                         snapshot.data!.docs[index]
-                                            .data()['imageUrl'],
+                                            .data()['imgUrl'],
                                         fit: BoxFit.cover,
-                                        alignment: Alignment.centerLeft,
+                                        alignment: Alignment.center,
                                       ),
                                     ),
                                   ),
@@ -96,20 +99,111 @@ class _CartProductsWidgetState extends State<CartProductsWidget> {
                                       SizedBox(
                                         height: screenSize.width * .02,
                                       ),
-                                      Text(
-                                        '₹${snapshot.data!.docs[index].data()['price']}',
-                                        style: productPricingStyle.copyWith(
-                                          fontSize: 12,
-                                        ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.baseline,
+                                        textBaseline: TextBaseline.alphabetic,
+                                        children: [
+                                          Text(
+                                            '₹${snapshot.data!.docs[index].data()['price']}',
+                                            style: productPricingStyle.copyWith(
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: screenSize.width * .02,
+                                          ),
+                                          snapshot.data!.docs[index]
+                                                      .data()['addonList']
+                                                      .length !=
+                                                  0
+                                              ? GestureDetector(
+                                                  onTap: () {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return AlertDialog(
+                                                            contentPadding:
+                                                                EdgeInsets.all(
+                                                                    0),
+                                                            content: Container(
+                                                              width: screenSize
+                                                                      .width /
+                                                                  3,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                              child: ListView
+                                                                  .builder(
+                                                                      itemCount: snapshot
+                                                                          .data!
+                                                                          .docs[
+                                                                              index]
+                                                                          .data()[
+                                                                              'addonList']
+                                                                          .length,
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      primary:
+                                                                          false,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              index2) {
+                                                                        return ListTile(
+                                                                          title:
+                                                                              Text(
+                                                                            snapshot.data!.docs[index].data()['addonList'][index2],
+                                                                            style:
+                                                                                categoryTitleStyle.copyWith(
+                                                                              color: Colors.black,
+                                                                              fontSize: 15,
+                                                                            ),
+                                                                          ),
+                                                                          trailing:
+                                                                              IconButton(
+                                                                            icon:
+                                                                                Icon(Icons.close),
+                                                                            onPressed:
+                                                                                () {},
+                                                                          ),
+                                                                        );
+                                                                      }),
+                                                            ),
+                                                          );
+                                                        });
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'Addons',
+                                                        style:
+                                                            productDescriptionStyle
+                                                                .copyWith(
+                                                          color: Colors
+                                                              .red.shade700,
+                                                        ),
+                                                      ),
+                                                      Icon(
+                                                        Icons.arrow_drop_down,
+                                                        color:
+                                                            Colors.red.shade700,
+                                                      )
+                                                    ],
+                                                  ))
+                                              : Container(),
+                                        ],
                                       ),
                                     ],
                                   ),
                                   Transform.scale(
                                     scale: 0.6,
                                     child: addQuantityWidget(
-                                      productId: snapshot.data!.docs[index]
-                                          .data()['productId'],
-                                    ),
+                                        product: ProductModel.fromJson(
+                                      snapshot.data!.docs[index].data(),
+                                    )),
                                   ),
                                 ],
                               ),
