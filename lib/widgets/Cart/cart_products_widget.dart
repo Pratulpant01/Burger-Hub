@@ -28,16 +28,20 @@ class _CartProductsWidgetState extends State<CartProductsWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Your Order',
-            textAlign: TextAlign.start,
-            style: labelTitleStyle.copyWith(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Text(
+              'Your Order',
+              textAlign: TextAlign.start,
+              style: labelTitleStyle.copyWith(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           Container(
             width: screenSize.width,
+            height: screenSize.height / 3,
             child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('users')

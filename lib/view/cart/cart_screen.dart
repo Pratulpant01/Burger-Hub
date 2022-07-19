@@ -35,9 +35,6 @@ class CartScreen extends StatelessWidget {
           children: [
             TotalSavingWidget(),
             CartProductsWidget(),
-            SizedBox(
-              height: screenSize.height * .15,
-            ),
           ],
         ),
       ),
@@ -46,8 +43,10 @@ class CartScreen extends StatelessWidget {
 }
 
 class PriceOverviewWidget extends StatelessWidget {
-  const PriceOverviewWidget({
+  int totalPrice;
+  PriceOverviewWidget({
     Key? key,
+    required this.totalPrice,
   }) : super(key: key);
 
   @override
@@ -66,7 +65,7 @@ class PriceOverviewWidget extends StatelessWidget {
         children: [
           TaxesPriceWidget(
             title: 'Item Total',
-            price: '₹66',
+            price: '₹${totalPrice}',
             oldPrice: '',
             isOffer: false,
           ),
@@ -90,13 +89,13 @@ class PriceOverviewWidget extends StatelessWidget {
                 FittedBox(
                   child: Text(
                     'Grand Total',
-                    style: labelTitleStyle.copyWith(fontSize: 18),
+                    style: labelTitleStyle.copyWith(fontSize: 15),
                   ),
                 ),
                 FittedBox(
                   child: Text(
-                    '₹23778',
-                    style: productPricingStyle,
+                    '₹${totalPrice}',
+                    style: productPricingStyle.copyWith(fontSize: 13),
                   ),
                 ),
               ],

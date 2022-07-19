@@ -18,7 +18,7 @@ class TaxesPriceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -27,6 +27,7 @@ class TaxesPriceWidget extends StatelessWidget {
               title,
               style: productDescriptionStyle.copyWith(
                 letterSpacing: 1,
+                fontSize: 10,
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
               ),

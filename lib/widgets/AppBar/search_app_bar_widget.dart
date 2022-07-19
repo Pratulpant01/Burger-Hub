@@ -1,6 +1,8 @@
+import 'package:burgerhub/bloc/Search%20Bloc/search_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/view/screen_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SearchAppBarWidget extends StatelessWidget with PreferredSizeWidget {
@@ -22,17 +24,26 @@ class SearchAppBarWidget extends StatelessWidget with PreferredSizeWidget {
           ),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: TextField(
-          controller: searchController,
-          cursorColor: primaryColor,
-          decoration: InputDecoration(
-            icon: Icon(
-              Icons.search,
-              color: primaryColor,
-            ),
-            hintText: 'Search for your faviorates',
-            border: InputBorder.none,
-          ),
+        child: BlocBuilder<SearchBloc, SearchState>(
+          builder: (context, state) {
+            return TextField(
+              controller: searchController,
+              cursorColor: primaryColor,
+              decoration: InputDecoration(
+                icon: Icon(
+                  Icons.search,
+                  color: primaryColor,
+                ),
+                hintText: 'Search for your favourite',
+                border: InputBorder.none,
+              ),
+              onSubmitted: (value) {
+                context
+                    .read<SearchBloc>()
+                    .add(SearchProductEvent(searchQuery: value));
+              },
+            );
+          },
         ),
       ),
     );
