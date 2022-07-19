@@ -11,6 +11,7 @@ A complete food app using flutter, bloc & firebase.
 5. Admin Screen
 6. Add Product Screen
 7. Cart Screen 
+8. Search Screen
 
 
 **Features Added**
@@ -23,6 +24,7 @@ A complete food app using flutter, bloc & firebase.
 6. Upload Products using Firebase & BLOC
 7. Get products from Firestore using Bloc & stream subscription
 8. Add Categories & Addons (Admin Feature)
+9. Search Products from search section
 
 
 
