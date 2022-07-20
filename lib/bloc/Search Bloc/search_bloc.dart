@@ -22,5 +22,12 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         return (SearchLoaded(snapshot: snapshot));
       });
     });
+    on<ShowAllProductsEvent>((event, emit) async {
+      emit(SearchLoading());
+      await emit.forEach(productServices.getAllProducts(),
+          onData: (QuerySnapshot<Map<String, dynamic>> snapshot) {
+        return SearchScreenDefaultState(snapshot: snapshot);
+      });
+    });
   }
 }

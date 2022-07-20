@@ -19,11 +19,11 @@ class ProductServices {
     return addonList;
   }
 
-  Stream getAllProducts() async* {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAllProducts() async* {
     Stream<QuerySnapshot<Map<String, dynamic>>> snapshot =
         firestore.collection('products').snapshots();
 
-    yield snapshot;
+    yield* snapshot;
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> searchItem(

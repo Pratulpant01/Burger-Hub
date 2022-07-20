@@ -5,6 +5,7 @@ import 'package:burgerhub/bloc/Cart%20Bloc/add_to_cart_bloc.dart';
 import 'package:burgerhub/bloc/Product%20Bloc/product_bloc.dart';
 import 'package:burgerhub/bloc/Search%20Bloc/search_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
+import 'package:burgerhub/demo.dart';
 import 'package:burgerhub/services/category_services.dart';
 import 'package:burgerhub/view/admin/admin_screen.dart';
 import 'package:burgerhub/view/admin/admin_view/add_addons.dart';
@@ -87,7 +88,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => SearchBloc(
               RepositoryProvider.of<ProductServices>(context),
-            ),
+            )..add(ShowAllProductsEvent()),
           ),
 
           // BlocProvider(

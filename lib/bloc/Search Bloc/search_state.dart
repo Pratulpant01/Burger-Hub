@@ -10,6 +10,13 @@ abstract class SearchState extends Equatable {
 
 class SearchInitial extends SearchState {}
 
+class SearchScreenDefaultState extends SearchState {
+  QuerySnapshot<Map<String, dynamic>> snapshot;
+  SearchScreenDefaultState({
+    required this.snapshot,
+  });
+}
+
 class SearchLoading extends SearchState {}
 
 class SearchLoaded extends SearchState {

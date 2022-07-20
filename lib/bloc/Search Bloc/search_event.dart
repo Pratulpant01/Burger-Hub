@@ -3,21 +3,18 @@ part of 'search_bloc.dart';
 
 abstract class SearchEvent extends Equatable {
   SearchEvent();
-}
-
-class GetSearchQuerytEvent extends SearchEvent {
   @override
   // TODO: implement props
   List<Object?> get props => [];
 }
+
+class GetSearchQuerytEvent extends SearchEvent {}
 
 class SearchProductEvent extends SearchEvent {
   String searchQuery;
   SearchProductEvent({
     required this.searchQuery,
   });
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [];
 }
+
+class ShowAllProductsEvent extends SearchEvent {}

@@ -41,19 +41,25 @@ class SearchScreen extends StatelessWidget {
                             state.snapshot.docs[index].data()));
                   },
                 );
+              } else if (state is SearchScreenDefaultState) {
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1 / 1.3,
+                  ),
+                  itemCount: state.snapshot.docs.length,
+                  itemBuilder: (context, index) {
+                    return productCard(
+                      product: ProductModel.fromJson(
+                          state.snapshot.docs[index].data()),
+                    );
+                  },
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
               }
-              return GridView(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1 / 1.3,
-                ),
-                children: [
-                  ElevatedButton(
-                    child: Text('Testing..'),
-                    onPressed: () {},
-                  )
-                ],
-              );
             },
           ),
         ));
