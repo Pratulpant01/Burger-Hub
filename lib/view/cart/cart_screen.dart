@@ -5,11 +5,6 @@ import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
 import 'package:burgerhub/widgets/Cart/cart_products_widget.dart';
-import 'package:burgerhub/widgets/Product/total_rating_widget.dart';
-import 'package:burgerhub/widgets/bottom_sheet_widget.dart';
-import 'package:burgerhub/widgets/button/add_quantity_widget.dart';
-import 'package:burgerhub/widgets/food%20widgets/food_type_widget.dart';
-import 'package:burgerhub/widgets/input%20widgets/heading_widget.dart';
 
 import '../../widgets/Cart/addons_widget.dart';
 import '../../widgets/Cart/cart_bottom_sheet.dart';

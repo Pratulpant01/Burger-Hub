@@ -31,7 +31,10 @@ class AddQuantityBloc extends Bloc<AddQuantityEvent, AddQuantityState> {
       }
       if (event is DecrementQuantityEvent) {
         if (isProductinCart) {
-          if (event.quantity! >= 1) {
+          if (event.quantity! >= 0) {
+            if (event.quantity == 0) {
+              await cartServices.deleteProductFromCart(event.product.productId);
+            }
             emit(AddQuantityLoaded(quantity: event.quantity! - 1));
             await cartServices.updateCartProduct(
                 event.quantity!, event.product);

@@ -30,7 +30,7 @@ class TotalSavingWidget extends StatelessWidget {
             ),
           ),
           Text(
-            '₹5000',
+            '₹208',
             style: productDescriptionStyle.copyWith(
               color: bluePrimaryColor,
               fontSize: 18,

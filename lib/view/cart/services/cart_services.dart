@@ -115,4 +115,17 @@ class CartServices {
       quantity,
     );
   }
+
+  Future<String> deleteProductFromCart(String productId) async {
+    String result = 'Something went wrong';
+    await firestore
+        .collection('users')
+        .doc(userId)
+        .collection('cart')
+        .doc(productId)
+        .delete();
+    result = 'Product removed from cart';
+
+    return result;
+  }
 }

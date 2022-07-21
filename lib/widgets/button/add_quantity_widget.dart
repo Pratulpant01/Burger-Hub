@@ -73,7 +73,7 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
                         child: Text(
                           value.toString(),
                           style: TextStyle(
-                            color: secondaryColor,
+                            color: Colors.black,
                             fontSize: 20,
                           ),
                         ),
@@ -89,7 +89,7 @@ class _addQuantityWidgetState extends State<addQuantityWidget> {
                       child: Text(
                         value.toString(),
                         style: TextStyle(
-                          color: secondaryColor,
+                          color: Colors.black,
                           fontSize: 20,
                         ),
                       ),

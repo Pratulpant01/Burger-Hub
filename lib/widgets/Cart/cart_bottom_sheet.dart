@@ -42,11 +42,12 @@ class cartBottomSheet extends StatelessWidget {
           }
           return Container(
             height: screenSize.height / 3.5,
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            padding: EdgeInsets.symmetric(horizontal: 5),
             decoration: BoxDecoration(
+                color: bgSecondaryColor,
                 border: Border.all(
-              color: Colors.grey.shade400,
-            )),
+                  color: Colors.grey.shade300,
+                )),
             child: Column(
               children: [
                 PriceOverviewWidget(
@@ -56,7 +57,9 @@ class cartBottomSheet extends StatelessWidget {
                   margin: EdgeInsets.symmetric(
                     horizontal: 10,
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 5,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(10),

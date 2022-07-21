@@ -12,8 +12,7 @@ class AdminServices {
 
   Future<String> uploadImageToStorage(
       Uint8List image, String productUid) async {
-    Reference storageRef =
-        await storage.ref().child('products').child(productUid);
+    Reference storageRef = storage.ref().child('products').child(productUid);
     UploadTask uploadFile = storageRef.putData(image);
     TaskSnapshot taskSnapshot = await uploadFile;
     Future<String> imageUrl = taskSnapshot.ref.getDownloadURL();

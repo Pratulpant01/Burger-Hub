@@ -40,7 +40,8 @@ class AccountScreen extends StatelessWidget {
                 Divider(),
                 headingWidget(
                   title: 'Your Previous Orders',
-                  isMore: false,
+                  isMore: true,
+                  onTap: () {},
                 ),
                 userData.role == 'Admin'
                     ? secondaryButton(

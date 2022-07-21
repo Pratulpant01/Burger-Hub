@@ -126,9 +126,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         });
                   }),
             ),
-            Container(
-              height: screenSize.height / 3,
-            ),
           ],
         ),
       ),
