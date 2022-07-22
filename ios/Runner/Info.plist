@@ -49,6 +49,12 @@
 	<string>Allow this app to access your camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow this app to access your photos</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tez</string>
+    	<string>phonepe</string>
+    	<string>paytmmp</string>
+	</array>
 	
 	
 </dict>

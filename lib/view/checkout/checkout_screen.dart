@@ -1,9 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:burgerhub/view/order_result_screen.dart';
+import 'package:burgerhub/widgets/button/main_button.dart';
+import 'package:burgerhub/widgets/button/primary_button.dart';
+import 'package:burgerhub/widgets/button/secondary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import 'package:burgerhub/constants/constant.dart';
-import 'package:burgerhub/widgets/AppBar/app_bar_widget.dart';
-import 'package:burgerhub/widgets/AppBar/search_app_bar_widget.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -16,11 +19,71 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   int selectedIndex = 0;
   String selectedAddressType = 'Home';
+  TextEditingController addressController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController pincodeController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
-  updateAddressType(String selectedAT) {
-    setState(() {
-      selectedAddressType = selectedAT;
-    });
+  Razorpay razorpay = Razorpay();
+
+  @override
+  void initState() {
+    initializeRazorPay();
+    super.initState();
+  }
+
+  void initializeRazorPay() {
+    razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
+
+  void launchRazorPay() {
+    Map<String, dynamic> orderDetails = {
+      "key": "rzp_test_MLEvBrU6shb7vY",
+      "entity": "order",
+      "amount": 50000,
+      "currency": "INR",
+    };
+    try {
+      razorpay.open(orderDetails);
+    } catch (e) {}
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    // Do something when payment succeeds
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) =>
+    //             OrderResultScreen(result: 'Order Sucessfull')));
+
+    print(response.orderId);
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                OrderResultScreen(result: 'Payment Failed. Please try again')));
+    // Do something when payment fails
+    print(response.message);
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => OrderResultScreen(result: 'Order....')));
+    // Do something when an external wallet is selected
+  }
+
+  @override
+  void dispose() {
+    razorpay.clear();
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -83,13 +146,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            height: screenSize.height,
             width: screenSize.width,
             decoration: BoxDecoration(
-              color: Colors.white,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: Colors.grey.shade300,
+                color: Colors.white,
               ),
             ),
             child: Column(
@@ -134,11 +195,71 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         );
                       }),
                 ),
+                Form(
+                    child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    textformWidget(
+                      formTitle: 'Address',
+                      controller: addressController,
+                    ),
+                    textformWidget(
+                      formTitle: 'City',
+                      controller: cityController,
+                    ),
+                    textformWidget(
+                      formTitle: 'Pincode',
+                      controller: pincodeController,
+                    ),
+                    textformWidget(
+                      formTitle: 'Phone Number',
+                      controller: phoneController,
+                    ),
+                  ],
+                )),
+                MainButton(
+                  onTap: launchRazorPay,
+                  buttonName: 'Place Order',
+                )
               ],
             ),
           )
         ],
       )),
+    );
+  }
+}
+
+class textformWidget extends StatelessWidget {
+  TextEditingController controller;
+  String formTitle;
+  textformWidget({
+    Key? key,
+    required this.controller,
+    required this.formTitle,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: TextFormField(
+        cursorColor: Colors.red,
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: formTitle,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(
+              color: Colors.black,
+            ),
+          ),
+        ),
+        autocorrect: false,
+      ),
     );
   }
 }

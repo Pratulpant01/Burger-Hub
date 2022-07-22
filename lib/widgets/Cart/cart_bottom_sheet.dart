@@ -1,10 +1,14 @@
-import 'package:burgerhub/constants/constant.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:burgerhub/view/checkout/checkout_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'package:burgerhub/constants/constant.dart';
+
 import '../../view/cart/cart_screen.dart';
+import '../button/main_button.dart';
 
 class cartBottomSheet extends StatelessWidget {
   cartBottomSheet({
@@ -53,27 +57,14 @@ class cartBottomSheet extends StatelessWidget {
                 PriceOverviewWidget(
                   totalPrice: totalPrice,
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 5,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  height: screenSize.width * .14,
-                  child: Center(
-                    child: Text(
-                      'Proceed To Checkout',
-                      style: productDescriptionStyle.copyWith(
-                        color: Colors.white,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
+                MainButton(
+                  buttonName: 'Proceed To Checkout',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CheckoutScreen()),
+                    );
+                  },
                 ),
               ],
             ),
