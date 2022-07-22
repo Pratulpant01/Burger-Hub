@@ -17,7 +17,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   int selectedIndex = 0;
   String selectedAddressType = 'Home';
 
-  void updateAddressType(String selectedAT) {
+  updateAddressType(String selectedAT) {
     setState(() {
       selectedAddressType = selectedAT;
     });
@@ -110,9 +110,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     letterSpacing: 1,
                   ),
                 ),
-                AddressTypeWidget(
-                  upadte: updateAddressType,
-                )
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  height: screenSize.height * .05,
+                  width: screenSize.width,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      primary: false,
+                      shrinkWrap: true,
+                      itemCount: addressType.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedIndex = index;
+                              selectedAddressType = addressType[selectedIndex];
+                            });
+                          },
+                          child: AddressTypeWidget(
+                            selectedIndex: selectedIndex,
+                            index: index,
+                          ),
+                        );
+                      }),
+                ),
               ],
             ),
           )
@@ -122,80 +143,46 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   }
 }
 
-class AddressTypeWidget extends StatefulWidget {
-  ValueChanged<String> upadte;
+class AddressTypeWidget extends StatelessWidget {
+  int index;
   AddressTypeWidget({
     Key? key,
-    required this.upadte,
+    required this.selectedIndex,
+    required this.index,
   }) : super(key: key);
 
-  int selectedIndex = 0;
-  String selectedAddress = 'Home';
-
-  @override
-  State<AddressTypeWidget> createState() => _AddressTypeWidgetState();
-}
-
-class _AddressTypeWidgetState extends State<AddressTypeWidget> {
-  @override
-  void setState(VoidCallback fn) {
-    widget.upadte(widget.selectedAddress);
-    super.setState(fn);
-  }
+  final int selectedIndex;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      height: screenSize.height * .05,
-      width: screenSize.width,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          primary: false,
-          shrinkWrap: true,
-          itemCount: addressType.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                widget.selectedIndex = index;
-                print(widget.selectedIndex);
-
-                widget.selectedAddress = addressType[widget.selectedIndex];
-                print(widget.selectedAddress);
-              },
-              child: FittedBox(
-                child: Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 5,
-                    vertical: 5,
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 5,
-                  ),
-                  decoration: BoxDecoration(
-                    color: widget.selectedIndex == index
-                        ? Colors.red.withOpacity(0.1)
-                        : Colors.transparent,
-                    border: Border.all(
-                      color: widget.selectedIndex == index
-                          ? Colors.red
-                          : Colors.grey.shade400,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      addressType[index],
-                      style: secondaryTitleStyle.copyWith(
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            );
-          }),
+    return FittedBox(
+      child: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: 5,
+          vertical: 5,
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 5,
+        ),
+        decoration: BoxDecoration(
+          color: selectedIndex == index
+              ? Colors.red.withOpacity(0.1)
+              : Colors.transparent,
+          border: Border.all(
+            color: selectedIndex == index ? Colors.red : Colors.grey.shade400,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Center(
+          child: Text(
+            addressType[index],
+            style: secondaryTitleStyle.copyWith(
+              fontSize: 15,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
