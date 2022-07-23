@@ -27,7 +27,22 @@ class CartModel {
     required this.addonList,
   });
 
-   
+  factory CartModel.fromJson(Map<String, dynamic> json) {
+    return CartModel(
+      productName: json['productName'],
+      description: json['description'],
+      price: json['price'],
+      productId: json['productId'],
+      rating: json['rating'],
+      time: json['time'],
+      category: json['category'],
+      imageUrl: json['imageUrl'],
+      type: json['type'],
+      quantity: json['quantity'],
+      totalPrice: json['totalPrice'],
+      addonList: json['addonList'],
+    );
+  }
 
   Map<String, dynamic> getJson() {
     return {

@@ -2,6 +2,7 @@ import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
 import 'package:burgerhub/bloc/Admin%20Bloc/admin_bloc.dart';
 import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
 import 'package:burgerhub/bloc/Cart%20Bloc/add_to_cart_bloc.dart';
+import 'package:burgerhub/bloc/Checkout/checkout_bloc.dart';
 import 'package:burgerhub/bloc/Product%20Bloc/product_bloc.dart';
 import 'package:burgerhub/bloc/Search%20Bloc/search_bloc.dart';
 import 'package:burgerhub/constants/constant.dart';
@@ -15,6 +16,7 @@ import 'package:burgerhub/view/auth/signin_screen.dart';
 import 'package:burgerhub/view/cart/cart_screen.dart';
 import 'package:burgerhub/view/cart/services/cart_services.dart';
 import 'package:burgerhub/view/checkout/checkout_screen.dart';
+import 'package:burgerhub/view/checkout/services/checkout_services.dart';
 import 'package:burgerhub/view/product/services/product_services.dart';
 import 'package:burgerhub/view/screen_layout.dart';
 import 'package:burgerhub/view/search_screen.dart';
@@ -52,6 +54,9 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => ProductServices(),
+        ),
+        RepositoryProvider(
+          create: (context) => CheckoutServices(),
         ),
       ],
       child: MultiBlocProvider(
@@ -91,6 +96,10 @@ class MyApp extends StatelessWidget {
               RepositoryProvider.of<ProductServices>(context),
             )..add(ShowAllProductsEvent()),
           ),
+          BlocProvider(
+            create: (context) =>
+                CheckoutBloc(RepositoryProvider.of<CheckoutServices>(context)),
+          ),
 
           // BlocProvider(
           //   create: (context) => AuthBloc(
@@ -113,7 +122,7 @@ class MyApp extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 } else if (user.hasData) {
-                  return CheckoutScreen();
+                  return ScreenLayout();
                 } else {
                   return SignInScreen();
                 }

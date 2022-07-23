@@ -1,13 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
+import 'package:burgerhub/bloc/Checkout/checkout_bloc.dart';
+import 'package:burgerhub/services/category_services.dart';
 import 'package:burgerhub/view/order_result_screen.dart';
 import 'package:burgerhub/widgets/button/main_button.dart';
-import 'package:burgerhub/widgets/button/primary_button.dart';
-import 'package:burgerhub/widgets/button/secondary_button.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
+
+import '../../widgets/Checkout/text_form_widget.dart';
+
+final _addressFormKey = GlobalKey<FormState>();
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({Key? key}) : super(key: key);
@@ -19,15 +26,17 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   int selectedIndex = 0;
   String selectedAddressType = 'Home';
+  String selectedAddress = '';
   TextEditingController addressController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
-  TextEditingController pincodeController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController flatnumberController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
 
   Razorpay razorpay = Razorpay();
 
   @override
   void initState() {
+    CategoryServices().getProducts();
     initializeRazorPay();
     super.initState();
   }
@@ -51,23 +60,22 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    // Do something when payment succeeds
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (context) =>
-    //             OrderResultScreen(result: 'Order Sucessfull')));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                OrderResultScreen(result: 'Order Sucessfull')));
 
     print(response.orderId);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                OrderResultScreen(result: 'Payment Failed. Please try again')));
-    // Do something when payment fails
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) =>
+    //             OrderResultScreen(result: 'Payment Failed. Please try again')));
+    // // Do something when payment fails
     print(response.message);
   }
 
@@ -82,13 +90,34 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   void dispose() {
     razorpay.clear();
-    // TODO: implement dispose
     super.dispose();
   }
 
+  // void addressSelected(String defaultAddress) {
+  //   selectedAddress = '';
+  //   bool isNewAddress = addressController.text.isNotEmpty &&
+  //       flatnumberController.text.isNotEmpty &&
+  //       phoneController.text.isNotEmpty;
+  //   if (isNewAddress) {
+  //     if (_addressFormKey.currentState!.validate()) {
+  //       selectedAddress =
+  //           '${nameController.text}, ${addressController.text},  ${flatnumberController.text},  ${phoneController.text}- ${selectedAddressType} ';
+  //     } else {
+  //       print('Please fill all the required fields');
+  //     }
+  //   } else if (defaultAddress.isNotEmpty) {
+  //     selectedAddress = defaultAddress;
+  //   } else {
+  //     throw Exception('Error');
+  //   }
+  //   print(selectedAddress);
+  // }
+
   @override
   Widget build(BuildContext context) {
-    print(selectedAddressType);
+    final userData = BlocProvider.of<AuthBloc>(context).state.userData;
+    String defaultAddress =
+        '${userData!.name}, ${userData.address}, ${userData.phoneNumber}';
     return Scaffold(
       appBar: SimpleAppBarWidget(
         hasBackButton: true,
@@ -128,7 +157,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 )),
                 Flexible(
                   child: Text(
-                    'Delhi near basant kunj, Pratul Pant, 8126416955',
+                    defaultAddress,
                     style: productDescriptionStyle.copyWith(
                       fontSize: 15,
                       color: Colors.grey.shade500,
@@ -196,114 +225,65 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       }),
                 ),
                 Form(
+                    key: _addressFormKey,
                     child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    textformWidget(
-                      formTitle: 'Address',
-                      controller: addressController,
-                    ),
-                    textformWidget(
-                      formTitle: 'City',
-                      controller: cityController,
-                    ),
-                    textformWidget(
-                      formTitle: 'Pincode',
-                      controller: pincodeController,
-                    ),
-                    textformWidget(
-                      formTitle: 'Phone Number',
-                      controller: phoneController,
-                    ),
-                  ],
-                )),
-                MainButton(
-                  onTap: launchRazorPay,
-                  buttonName: 'Place Order',
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        textformWidget(
+                          formTitle: 'Name',
+                          controller: nameController,
+                        ),
+                        textformWidget(
+                          formTitle: 'Address',
+                          controller: addressController,
+                        ),
+                        textformWidget(
+                          formTitle: 'Flat / House Number',
+                          controller: flatnumberController,
+                        ),
+                        textformWidget(
+                          formTitle: 'Phone Number',
+                          controller: phoneController,
+                        ),
+                      ],
+                    )),
+                BlocBuilder<CheckoutBloc, CheckoutState>(
+                  builder: (context, state) {
+                    print(state);
+                    if (state is CheckoutLoading) {
+                      return MainButton(
+                        onTap: () {},
+                        buttonName: '',
+                        isLoading: true,
+                      );
+                    } else {
+                      return MainButton(
+                        onTap: () {
+                          context
+                              .read<CheckoutBloc>()
+                              .add(getSelectedAddressEvent(
+                                name: nameController.text,
+                                addressFormKey: _addressFormKey,
+                                address: addressController.text,
+                                addressType: selectedAddressType,
+                                flatNumber: flatnumberController.text,
+                                phoneNumber: phoneController.text,
+                                defaultAddress: defaultAddress,
+                              ));
+
+                          print(state.selectedAddress);
+                          launchRazorPay();
+                        },
+                        buttonName: 'Place Order',
+                      );
+                    }
+                  },
                 )
               ],
             ),
           )
         ],
       )),
-    );
-  }
-}
-
-class textformWidget extends StatelessWidget {
-  TextEditingController controller;
-  String formTitle;
-  textformWidget({
-    Key? key,
-    required this.controller,
-    required this.formTitle,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: TextFormField(
-        cursorColor: Colors.red,
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: formTitle,
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(
-              color: Colors.black,
-            ),
-          ),
-        ),
-        autocorrect: false,
-      ),
-    );
-  }
-}
-
-class AddressTypeWidget extends StatelessWidget {
-  int index;
-  AddressTypeWidget({
-    Key? key,
-    required this.selectedIndex,
-    required this.index,
-  }) : super(key: key);
-
-  final int selectedIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    return FittedBox(
-      child: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: 5,
-          vertical: 5,
-        ),
-        padding: EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 5,
-        ),
-        decoration: BoxDecoration(
-          color: selectedIndex == index
-              ? Colors.red.withOpacity(0.1)
-              : Colors.transparent,
-          border: Border.all(
-            color: selectedIndex == index ? Colors.red : Colors.grey.shade400,
-          ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Center(
-          child: Text(
-            addressType[index],
-            style: secondaryTitleStyle.copyWith(
-              fontSize: 15,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

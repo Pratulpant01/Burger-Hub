@@ -5,11 +5,13 @@ import '../../constants/constant.dart';
 class MainButton extends StatelessWidget {
   VoidCallback onTap;
   String buttonName;
+  bool isLoading;
 
   MainButton({
     Key? key,
     required this.onTap,
     required this.buttonName,
+    this.isLoading = false,
   }) : super(key: key);
 
   @override
@@ -29,13 +31,17 @@ class MainButton extends StatelessWidget {
         ),
         height: screenSize.width * .14,
         child: Center(
-          child: Text(
-            buttonName,
-            style: productDescriptionStyle.copyWith(
-              color: Colors.white,
-              fontSize: 15,
-            ),
-          ),
+          child: isLoading
+              ? CircularProgressIndicator(
+                  color: Colors.white,
+                )
+              : Text(
+                  buttonName,
+                  style: productDescriptionStyle.copyWith(
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),
+                ),
         ),
       ),
     );
