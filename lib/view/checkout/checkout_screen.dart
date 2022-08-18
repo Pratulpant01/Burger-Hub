@@ -2,6 +2,7 @@
 import 'package:burgerhub/bloc/Auth%20Bloc/auth_bloc.dart';
 import 'package:burgerhub/bloc/Checkout/checkout_bloc.dart';
 import 'package:burgerhub/services/category_services.dart';
+import 'package:burgerhub/view/checkout/services/checkout_services.dart';
 import 'package:burgerhub/view/order_result_screen.dart';
 import 'package:burgerhub/widgets/button/main_button.dart';
 
@@ -17,7 +18,8 @@ import '../../widgets/Checkout/text_form_widget.dart';
 final _addressFormKey = GlobalKey<FormState>();
 
 class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({Key? key}) : super(key: key);
+  int totalPrice;
+  CheckoutScreen({Key? key, required this.totalPrice}) : super(key: key);
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -51,7 +53,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     Map<String, dynamic> orderDetails = {
       "key": "rzp_test_MLEvBrU6shb7vY",
       "entity": "order",
-      "amount": 50000,
+      "amount": widget.totalPrice * 100,
       "currency": "INR",
     };
     try {
@@ -247,9 +249,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         ),
                       ],
                     )),
-                BlocBuilder<CheckoutBloc, CheckoutState>(
+                BlocConsumer<CheckoutBloc, CheckoutState>(
+                  listener: (context, state) {
+                    if (state is CheckoutLoaded) {
+                      selectedAddress = state.selectedAddress;
+                      print('Adddress =' + selectedAddress);
+                      launchRazorPay();
+                      CheckoutServices()
+                          .uploadAddressinDatabase(selectedAddress);
+                    }
+                  },
                   builder: (context, state) {
-                    print(state);
                     if (state is CheckoutLoading) {
                       return MainButton(
                         onTap: () {},
@@ -258,7 +268,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       );
                     } else {
                       return MainButton(
-                        onTap: () {
+                        onTap: () async {
+                          print(state);
                           context
                               .read<CheckoutBloc>()
                               .add(getSelectedAddressEvent(
@@ -270,9 +281,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 phoneNumber: phoneController.text,
                                 defaultAddress: defaultAddress,
                               ));
-
-                          print(state.selectedAddress);
-                          launchRazorPay();
                         },
                         buttonName: 'Place Order',
                       );

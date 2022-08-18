@@ -62,7 +62,10 @@ class cartBottomSheet extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CheckoutScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => CheckoutScreen(
+                                totalPrice: totalPrice,
+                              )),
                     );
                   },
                 ),

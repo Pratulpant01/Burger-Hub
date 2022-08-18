@@ -26,6 +26,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       );
 
       emit(CheckoutLoaded(selectedAddress: shippingAddress));
+      print(state);
 
       // String selectedAddress = '';
       // bool isNewAddress = event.address.isNotEmpty &&
