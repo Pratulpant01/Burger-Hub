@@ -36,7 +36,7 @@ class CartModel {
       rating: json['rating'],
       time: json['time'],
       category: json['category'],
-      imageUrl: json['imageUrl'],
+      imageUrl: json['imgUrl'],
       type: json['type'],
       quantity: json['quantity'],
       totalPrice: json['totalPrice'],

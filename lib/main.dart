@@ -17,6 +17,7 @@ import 'package:burgerhub/view/cart/cart_screen.dart';
 import 'package:burgerhub/view/cart/services/cart_services.dart';
 import 'package:burgerhub/view/checkout/checkout_screen.dart';
 import 'package:burgerhub/view/checkout/services/checkout_services.dart';
+import 'package:burgerhub/view/order_result_screen.dart';
 import 'package:burgerhub/view/product/services/product_services.dart';
 import 'package:burgerhub/view/screen_layout.dart';
 import 'package:burgerhub/view/search_screen.dart';

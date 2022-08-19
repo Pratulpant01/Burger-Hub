@@ -62,30 +62,37 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    CheckoutServices().uploadOrdertoDatabase(
+        widget.totalPrice, selectedAddress, 'Success', 'Preparing');
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                OrderResultScreen(result: 'Order Sucessfull')));
-
-    print(response.orderId);
+            builder: (context) => OrderResultScreen(
+                  result: 'Order Sucessfull',
+                  isPayment: true,
+                )));
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (context) =>
-    //             OrderResultScreen(result: 'Payment Failed. Please try again')));
-    // // Do something when payment fails
-    print(response.message);
+    CheckoutServices().uploadOrdertoDatabase(
+        widget.totalPrice, selectedAddress, 'Cancelled', 'Failed');
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => OrderResultScreen(
+                  result: 'Payment Failed',
+                  isPayment: false,
+                )));
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => OrderResultScreen(result: 'Order....')));
+            builder: (context) => OrderResultScreen(
+                  result: 'Payment Failed',
+                  isPayment: false,
+                )));
     // Do something when an external wallet is selected
   }
 
@@ -253,10 +260,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   listener: (context, state) {
                     if (state is CheckoutLoaded) {
                       selectedAddress = state.selectedAddress;
-                      print('Adddress =' + selectedAddress);
                       launchRazorPay();
-                      CheckoutServices()
-                          .uploadAddressinDatabase(selectedAddress);
+                      CheckoutServices().getOrderId();
                     }
                   },
                   builder: (context, state) {
@@ -269,7 +274,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     } else {
                       return MainButton(
                         onTap: () async {
-                          print(state);
                           context
                               .read<CheckoutBloc>()
                               .add(getSelectedAddressEvent(
