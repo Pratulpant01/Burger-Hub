@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:burgerhub/demo.dart';
+import 'package:burgerhub/view/account/your_orders_screen.dart';
 import 'package:burgerhub/view/admin/admin_screen.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,7 +16,7 @@ import 'package:burgerhub/widgets/button/secondary_button.dart';
 import 'package:burgerhub/widgets/input%20widgets/heading_widget.dart';
 import 'package:burgerhub/widgets/Product/product_card_widget.dart';
 
-import '../widgets/Product/listile_widget.dart';
+import '../../widgets/Product/listile_widget.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -41,7 +42,12 @@ class AccountScreen extends StatelessWidget {
                 headingWidget(
                   title: 'Your Previous Orders',
                   isMore: true,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => YourOrderScreen()));
+                  },
                 ),
                 userData.role == 'Admin'
                     ? secondaryButton(

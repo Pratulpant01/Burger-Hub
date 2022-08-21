@@ -1,7 +1,7 @@
 import 'package:burgerhub/models/addon_model.dart';
 import 'package:burgerhub/models/category_model.dart';
 import 'package:burgerhub/models/product_model.dart';
-import 'package:burgerhub/view/account_screen.dart';
+import 'package:burgerhub/view/account/account_screen.dart';
 import 'package:burgerhub/view/cart/cart_screen.dart';
 import 'package:burgerhub/view/home_screen.dart';
 import 'package:burgerhub/view/search_screen.dart';
