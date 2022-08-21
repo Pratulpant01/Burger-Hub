@@ -1,15 +1,18 @@
-import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
-import 'package:burgerhub/models/cart_model.dart';
-import 'package:burgerhub/models/product_model.dart';
-import 'package:burgerhub/widgets/Cart/cart_quantity_button.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:burgerhub/bloc/Add%20Quantity%20Bloc/add_quantity_bloc.dart';
+import 'package:burgerhub/models/cart_model.dart';
+import 'package:burgerhub/models/product_model.dart';
+import 'package:burgerhub/widgets/Cart/cart_quantity_button.dart';
+
 import '../../constants/constant.dart';
 import '../button/add_quantity_widget.dart';
+import 'addon_widgets.dart';
 
 class CartProductsWidget extends StatefulWidget {
   const CartProductsWidget({
@@ -121,82 +124,10 @@ class _CartProductsWidgetState extends State<CartProductsWidget> {
                                                       .data()['addonList']
                                                       .length !=
                                                   0
-                                              ? GestureDetector(
-                                                  onTap: () {
-                                                    showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return AlertDialog(
-                                                            contentPadding:
-                                                                EdgeInsets.all(
-                                                                    0),
-                                                            content: Container(
-                                                              width: screenSize
-                                                                      .width /
-                                                                  3,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                              child: ListView
-                                                                  .builder(
-                                                                      itemCount: snapshot
-                                                                          .data!
-                                                                          .docs[
-                                                                              index]
-                                                                          .data()[
-                                                                              'addonList']
-                                                                          .length,
-                                                                      shrinkWrap:
-                                                                          true,
-                                                                      primary:
-                                                                          false,
-                                                                      itemBuilder:
-                                                                          (context,
-                                                                              index2) {
-                                                                        return ListTile(
-                                                                          title:
-                                                                              Text(
-                                                                            snapshot.data!.docs[index].data()['addonList'][index2],
-                                                                            style:
-                                                                                categoryTitleStyle.copyWith(
-                                                                              color: Colors.black,
-                                                                              fontSize: 15,
-                                                                            ),
-                                                                          ),
-                                                                          trailing:
-                                                                              IconButton(
-                                                                            icon:
-                                                                                Icon(Icons.close),
-                                                                            onPressed:
-                                                                                () {},
-                                                                          ),
-                                                                        );
-                                                                      }),
-                                                            ),
-                                                          );
-                                                        });
-                                                  },
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        'Addons',
-                                                        style:
-                                                            productDescriptionStyle
-                                                                .copyWith(
-                                                          color: Colors
-                                                              .red.shade700,
-                                                        ),
-                                                      ),
-                                                      Icon(
-                                                        Icons.arrow_drop_down,
-                                                        color:
-                                                            Colors.red.shade700,
-                                                      )
-                                                    ],
-                                                  ))
+                                              ? addon_widget(
+                                                  snapshot: snapshot,
+                                                  index: index,
+                                                )
                                               : Container(),
                                         ],
                                       ),

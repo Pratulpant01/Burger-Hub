@@ -94,11 +94,11 @@ class AdminScreen extends StatelessWidget {
                       icon: Icons.remove,
                       onTap: () {},
                     ),
-                    ListTileWidget(
-                      name: 'Update Order Status',
-                      icon: Icons.food_bank_outlined,
-                      onTap: () {},
-                    ),
+                    // ListTileWidget(
+                    //   name: 'Update Order Status',
+                    //   icon: Icons.food_bank_outlined,
+                    //   onTap: () {},
+                    // ),
                     ListTileWidget(
                       name: 'Add Catergories',
                       icon: Icons.category_outlined,

@@ -6,7 +6,6 @@ import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
 import 'package:burgerhub/widgets/Cart/cart_products_widget.dart';
 
-import '../../widgets/Cart/addons_widget.dart';
 import '../../widgets/Cart/cart_bottom_sheet.dart';
 import '../../widgets/Cart/price_taxes_widget.dart';
 import '../../widgets/Cart/price_widget.dart';

@@ -1,6 +1,7 @@
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/order_model.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
+import 'package:burgerhub/widgets/Cart/addon_widgets.dart';
 import 'package:burgerhub/widgets/food%20widgets/food_type_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,6 +19,7 @@ class YourOrderScreen extends StatelessWidget {
         hasBackButton: true,
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Column(
           children: [
             Center(
@@ -42,26 +44,35 @@ class YourOrderScreen extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     );
                   }
+                  if (snapshot.data!.docs.length == 0) {
+                    return Center(
+                      child: Text('No Orders'),
+                    );
+                  }
 
                   return ListView.builder(
+                    physics: ScrollPhysics(),
                     itemCount: snapshot.data!.docs.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       String orderStatus =
                           snapshot.data!.docs[index].data()['orderStatus'];
                       return Container(
+                        alignment: Alignment.center,
                         margin:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.grey,
+                            color: Colors.grey.shade300,
                           ),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: ExpansionTile(
-                            collapsedBackgroundColor: Colors.white70,
+                            initiallyExpanded: true,
+                            backgroundColor: Colors.white70,
+                            iconColor: primaryColor,
                             textColor: primaryColor,
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,7 +81,7 @@ class YourOrderScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Order No. ${index}',
+                                      'Order No. ${index + 1}',
                                       style: productTitleStyle,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -135,28 +146,59 @@ class YourOrderScreen extends StatelessWidget {
                                                   snapshot1.data!.docs.length,
                                               shrinkWrap: true,
                                               itemBuilder: (context, index1) {
-                                                return Row(
+                                                return Column(
                                                   children: [
-                                                    foodTypeWidget(
-                                                        foodtype: snapshot1
-                                                            .data!.docs[index1]
-                                                            .data()['type']),
-                                                    Text(
-                                                      '${snapshot1.data!.docs[index1].data()['quantity']} ',
-                                                      style: TextStyle(
-                                                          color: Colors
-                                                              .grey.shade600),
-                                                    ),
-                                                    Text(
-                                                      'X',
-                                                      style: TextStyle(
-                                                          color: Colors
-                                                              .grey.shade600),
-                                                    ),
-                                                    Text(
-                                                      ' ${snapshot1.data!.docs[index1].data()['productName']} ',
-                                                      style: TextStyle(
-                                                          color: Colors.black),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            foodTypeWidget(
+                                                                foodtype: snapshot1
+                                                                        .data!
+                                                                        .docs[
+                                                                            index1]
+                                                                        .data()[
+                                                                    'type']),
+                                                            Text(
+                                                              '${snapshot1.data!.docs[index1].data()['quantity']} ',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade600),
+                                                            ),
+                                                            Text(
+                                                              'X',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade600),
+                                                            ),
+                                                            Text(
+                                                              ' ${snapshot1.data!.docs[index1].data()['productName']} ',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        snapshot1
+                                                                    .data!
+                                                                    .docs[
+                                                                        index1]
+                                                                    .data()[
+                                                                        'addonList']
+                                                                    .length !=
+                                                                0
+                                                            ? addon_widget(
+                                                                snapshot:
+                                                                    snapshot1,
+                                                                index: index1,
+                                                              )
+                                                            : Container(),
+                                                      ],
                                                     ),
                                                   ],
                                                 );
@@ -183,7 +225,19 @@ class YourOrderScreen extends StatelessWidget {
                                               color: Colors.black),
                                         ),
                                       ],
-                                    )
+                                    ),
+                                    Divider(
+                                      color: Colors.grey,
+                                    ),
+                                    Text(
+                                      '${snapshot.data!.docs[index].data()['shippingAddress']}',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: productDescriptionStyle.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -193,7 +247,7 @@ class YourOrderScreen extends StatelessWidget {
                       );
                     },
                   );
-                })
+                }),
           ],
         ),
       ),

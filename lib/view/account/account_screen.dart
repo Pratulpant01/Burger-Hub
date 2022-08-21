@@ -39,16 +39,16 @@ class AccountScreen extends StatelessWidget {
                   name: userData!.name,
                 ),
                 Divider(),
-                headingWidget(
-                  title: 'Your Previous Orders',
-                  isMore: true,
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => YourOrderScreen()));
-                  },
-                ),
+                // headingWidget(
+                //   title: 'Your Previous Orders',
+                //   isMore: true,
+                //   onTap: () {
+                //     Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => YourOrderScreen()));
+                //   },
+                // ),
                 userData.role == 'Admin'
                     ? secondaryButton(
                         buttonName: 'Admin Panel',
@@ -61,19 +61,7 @@ class AccountScreen extends StatelessWidget {
                           );
                         },
                       )
-                    : Container(
-                        height: screenSize.height * .31,
-                        child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 4,
-                            primary: false,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return productCard(
-                                product: demoProducts[index],
-                              );
-                            }),
-                      ),
+                    : Container(),
                 headingWidget(
                   title: 'Settings',
                   isMore: false,
@@ -89,8 +77,18 @@ class AccountScreen extends StatelessWidget {
                         scrollDirection: Axis.vertical,
                         children: [
                           ListTileWidget(
-                            name: 'Check your cart',
+                            name: 'My Orders',
                             icon: Icons.fastfood_outlined,
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => YourOrderScreen()));
+                            },
+                          ),
+                          ListTileWidget(
+                            name: 'Check your cart',
+                            icon: Icons.shopping_bag_outlined,
                             onTap: () {
                               Navigator.pushReplacement(
                                 context,
