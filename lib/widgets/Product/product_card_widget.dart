@@ -2,12 +2,9 @@
 import 'package:burgerhub/view/product/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/widgets/Product/total_rating_widget.dart';
-
-import '../../view/product/services/product_services.dart';
 
 class productCard extends StatelessWidget {
   ProductModel product;
@@ -46,13 +43,13 @@ class productCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AspectRatio(
-                  aspectRatio: 16 / 10,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  child: Container(
+                    height: screenSize.height / 7,
+                    width: screenSize.width,
                     child: Image.network(
                       product.imageUrl,
                       fit: BoxFit.cover,
@@ -63,6 +60,7 @@ class productCard extends StatelessWidget {
                   height: screenSize.height * .003,
                 ),
                 Flexible(
+                  flex: 2,
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
@@ -74,9 +72,9 @@ class productCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Container(
                     child: Text(
                       product.description,
                       style: productDescriptionStyle,
@@ -91,7 +89,6 @@ class productCard extends StatelessWidget {
                     padding: const EdgeInsets.only(
                       left: 5,
                       right: 5,
-                      bottom: 3,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -55,6 +55,7 @@ class AddCategories extends StatelessWidget {
                   ),
                   secondaryButton(
                     buttonName: 'Publish Category',
+                    isLoading: false,
                     onTap: () {
                       CategoryServices().uploadCategoryToDataBase(
                         categoryNameController.text,

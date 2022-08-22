@@ -44,7 +44,7 @@ class SeeMoreProductScreen extends StatelessWidget {
                       itemCount: snapshot.data.docs.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 2 / 2.5,
+                        childAspectRatio: 1 / 1.3,
                       ),
                       itemBuilder: (context, index) {
                         return productCard(

@@ -163,11 +163,11 @@ TextStyle categoryTitleStyle = GoogleFonts.akshar(
 );
 
 TextStyle productTitleStyle = GoogleFonts.aldrich(
-  fontSize: 13,
+  fontSize: 12,
   fontWeight: FontWeight.bold,
 );
 TextStyle productDescriptionStyle = GoogleFonts.akshar(
-  fontSize: 12,
+  fontSize: 10,
 );
 TextStyle productPricingStyle = GoogleFonts.aclonica(
   fontSize: 15,

@@ -5,7 +5,6 @@ import 'package:burgerhub/models/product_model.dart';
 import 'package:burgerhub/services/category_services.dart';
 import 'package:burgerhub/view/product/see_more_product_screen.dart';
 import 'package:burgerhub/widgets/Category/category_showcase.dart';
-import 'package:burgerhub/widgets/input%20widgets/primary_heading_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

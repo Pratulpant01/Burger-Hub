@@ -56,6 +56,7 @@ class AddAddons extends StatelessWidget {
               ),
               secondaryButton(
                 buttonName: 'Publish Addons',
+                isLoading: false,
                 onTap: () async {
                   String result = await AdminServices().uploadAddonsToDatabase(
                     AddOnModel(

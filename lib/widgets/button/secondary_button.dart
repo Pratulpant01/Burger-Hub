@@ -5,12 +5,12 @@ import '../../constants/constant.dart';
 class secondaryButton extends StatelessWidget {
   String? buttonName;
   VoidCallback? onTap;
-  bool? isLoading;
+  bool isLoading;
   secondaryButton({
     Key? key,
     this.buttonName,
     this.onTap,
-    this.isLoading = false,
+    required this.isLoading,
   }) : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class secondaryButton extends StatelessWidget {
           color: primaryColor,
         ),
         child: Center(
-          child: isLoading!
+          child: isLoading
               ? FittedBox(
                   child: CircularProgressIndicator(
                     color: Colors.white,

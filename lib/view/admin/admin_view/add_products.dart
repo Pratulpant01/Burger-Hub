@@ -186,6 +186,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
                   return secondaryButton(
                     buttonName: 'Upload Product',
+                    isLoading: false,
                     onTap: () {
                       context.read<AdminBloc>().add(
                             uploadProductEvent(

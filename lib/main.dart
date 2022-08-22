@@ -9,9 +9,6 @@ import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/demo.dart';
 import 'package:burgerhub/services/category_services.dart';
 import 'package:burgerhub/view/account/account_screen.dart';
-import 'package:burgerhub/view/account/your_orders_screen.dart';
-import 'package:burgerhub/view/admin/admin_screen.dart';
-import 'package:burgerhub/view/admin/admin_view/add_addons.dart';
 import 'package:burgerhub/view/admin/services/admin_services.dart';
 import 'package:burgerhub/view/auth/services/auth_services.dart';
 import 'package:burgerhub/view/auth/signin_screen.dart';
@@ -74,11 +71,11 @@ class MyApp extends StatelessWidget {
               RepositoryProvider.of<CategoryServices>(context),
             )..add(getProductsEvent()),
           ),
-          BlocProvider(
-            create: (context) => AuthBloc(
-              RepositoryProvider.of<AuthServices>(context),
-            )..add(getUserDataEvent()),
-          ),
+          // BlocProvider(
+          //   create: (context) => AuthBloc(
+          //     RepositoryProvider.of<AuthServices>(context),
+          //   )..add(getUserDataEvent()),
+          // ),
           BlocProvider(
             create: (context) => AdminBloc(
               RepositoryProvider.of<AdminServices>(context),

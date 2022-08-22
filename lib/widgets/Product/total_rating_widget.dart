@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:burgerhub/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,7 +13,7 @@ class totalRatingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-      fit: BoxFit.cover,
+      fit: BoxFit.contain,
       child: Container(
         padding: EdgeInsets.all(size / 2),
         decoration: BoxDecoration(

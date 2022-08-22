@@ -52,6 +52,7 @@ class AccountScreen extends StatelessWidget {
                 userData.role == 'Admin'
                     ? secondaryButton(
                         buttonName: 'Admin Panel',
+                        isLoading: false,
                         onTap: () {
                           Navigator.push(
                             context,
