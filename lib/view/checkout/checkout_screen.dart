@@ -63,7 +63,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     CheckoutServices().uploadOrdertoDatabase(
-        widget.totalPrice, selectedAddress, 'Success', 'Preparing');
+        widget.totalPrice, selectedAddress, 'Completed', 'Preparing');
     Navigator.push(
         context,
         MaterialPageRoute(

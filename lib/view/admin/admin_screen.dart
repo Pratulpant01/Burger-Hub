@@ -3,6 +3,7 @@ import 'package:burgerhub/demo.dart';
 import 'package:burgerhub/view/admin/admin_view/add_addons.dart';
 import 'package:burgerhub/view/admin/admin_view/add_categories.dart';
 import 'package:burgerhub/view/admin/admin_view/add_products.dart';
+import 'package:burgerhub/view/admin/admin_view/check_orders.dart';
 import 'package:burgerhub/widgets/AppBar/app_bar_widget.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
 import 'package:burgerhub/widgets/input%20widgets/heading_widget.dart';
@@ -75,7 +76,12 @@ class AdminScreen extends StatelessWidget {
                     ListTileWidget(
                       name: 'Check Orders',
                       icon: Icons.room_service,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CheckOrders()));
+                      },
                     ),
                     ListTileWidget(
                       name: 'Add Product',
