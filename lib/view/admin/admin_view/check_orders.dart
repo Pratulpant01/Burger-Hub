@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:burgerhub/view/admin/admin_view/order_info.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:intl/intl.dart';
 
 import 'package:burgerhub/constants/constant.dart';
+import 'package:burgerhub/view/admin/admin_view/order_info.dart';
 import 'package:burgerhub/widgets/AppBar/simple_appbar_widget.dart';
-import 'package:intl/intl.dart';
 
 class CheckOrders extends StatefulWidget {
   const CheckOrders({Key? key}) : super(key: key);
@@ -51,6 +51,8 @@ class _CheckOrdersState extends State<CheckOrders> {
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       return orderTab(
+                          orderId:
+                              snapshot.data!.docs[index].data()['orderNumber'],
                           orderedAt: DateFormat('dd-MM-yyyy').format(snapshot
                               .data!.docs[index]
                               .data()['orderedAt']
@@ -73,6 +75,7 @@ class _CheckOrdersState extends State<CheckOrders> {
 
 class orderTab extends StatelessWidget {
   String orderedAt;
+  String orderId;
   String foodStatus;
   String paymentStatus;
   String deliveryAddress;
@@ -80,6 +83,7 @@ class orderTab extends StatelessWidget {
   orderTab({
     Key? key,
     required this.orderedAt,
+    required this.orderId,
     required this.foodStatus,
     required this.paymentStatus,
     required this.deliveryAddress,
@@ -91,7 +95,11 @@ class orderTab extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => OrderInfo()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => OrderInfo(
+                      orderId: orderId,
+                    )));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -117,16 +125,13 @@ class orderTab extends StatelessWidget {
                 order_info_widget(
                   heading: 'Status',
                   value: foodStatus,
-                  color: foodStatus == "Preparing"
-                      ? Colors.green
-                      : Color.fromARGB(255, 220, 20, 6),
+                  color: foodStatus == "Preparing" ? Colors.green : alertColor,
                 ),
                 order_info_widget(
                   heading: 'Payment',
                   value: paymentStatus,
-                  color: paymentStatus == 'Completed'
-                      ? Colors.green
-                      : Color.fromARGB(255, 220, 20, 6),
+                  color:
+                      paymentStatus == 'Completed' ? Colors.green : alertColor,
                 ),
               ],
             ),

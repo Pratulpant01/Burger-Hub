@@ -10,6 +10,7 @@ import 'package:burgerhub/demo.dart';
 import 'package:burgerhub/services/category_services.dart';
 import 'package:burgerhub/view/account/account_screen.dart';
 import 'package:burgerhub/view/admin/admin_view/check_orders.dart';
+import 'package:burgerhub/view/admin/admin_view/order_info.dart';
 import 'package:burgerhub/view/admin/services/admin_services.dart';
 import 'package:burgerhub/view/auth/services/auth_services.dart';
 import 'package:burgerhub/view/auth/signin_screen.dart';
@@ -123,7 +124,9 @@ class MyApp extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 } else if (user.hasData) {
-                  return CheckOrders();
+                  return OrderInfo(
+                    orderId: '817c8ce6-73c2-41b1-83f0-fbd6b576495e',
+                  );
                 } else {
                   return SignInScreen();
                 }

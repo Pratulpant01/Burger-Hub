@@ -21,6 +21,7 @@ Color primaryColor = Color(0xffE25100);
 Color secondaryColor = Color(0xffEE4D2A);
 Color darkTextColor = Color(0xff482A2A);
 Color descriptionTextColor = Color(0xff38393F);
+Color alertColor = Color.fromARGB(255, 220, 20, 6);
 
 Color bgSecondaryColor = Color(0xFFF7F3F3);
 Color bluePrimaryColor = Color.fromARGB(255, 0, 112, 203);
