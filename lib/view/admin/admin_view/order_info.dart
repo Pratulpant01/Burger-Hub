@@ -143,8 +143,8 @@ class _OrderInfoState extends State<OrderInfo> {
                           },
                           items: [
                             DropdownMenuItem(
-                              child: Text(orderStatus),
-                              value: orderStatus,
+                              child: Text('Preparing'),
+                              value: 'Preparing',
                             ),
                             DropdownMenuItem(
                               child: Text('Completed'),
@@ -153,6 +153,32 @@ class _OrderInfoState extends State<OrderInfo> {
                             DropdownMenuItem(
                               child: Text('Failed'),
                               value: 'Failed',
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: screenSize.height * .02,
+                        ),
+                        DropdownListWidget(
+                          orderStatus: paymentStatus,
+                          headingTitle: 'Change Payment Status',
+                          onChange: (value) async {
+                            await AdminServices()
+                                .updatePaymentStatus(value, widget.orderId);
+                            orderStatus = value;
+                          },
+                          items: [
+                            DropdownMenuItem(
+                              child: Text('Completed'),
+                              value: 'Completed',
+                            ),
+                            DropdownMenuItem(
+                              child: Text('Failed'),
+                              value: 'Failed',
+                            ),
+                            DropdownMenuItem(
+                              child: Text('Pending'),
+                              value: 'Pending',
                             ),
                           ],
                         ),
@@ -165,7 +191,7 @@ class _OrderInfoState extends State<OrderInfo> {
   }
 }
 
-class DropdownListWidget extends StatefulWidget {
+class DropdownListWidget extends StatelessWidget {
   String headingTitle;
   List<DropdownMenuItem<String>> items;
   ValueChanged onChange;
@@ -180,28 +206,23 @@ class DropdownListWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<DropdownListWidget> createState() => _DropdownListWidgetState();
-}
-
-class _DropdownListWidgetState extends State<DropdownListWidget> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         children: [
           Text(
-            'Change Order Status',
+            headingTitle,
             style: labelTitleStyle.copyWith(
               fontSize: 18,
               color: darkTextColor,
             ),
           ),
           DropdownButton<String>(
-            value: widget.orderStatus,
+            value: orderStatus,
             isExpanded: true,
-            items: widget.items,
-            onChanged: widget.onChange,
+            items: items,
+            onChanged: onChange,
           )
         ],
       ),
