@@ -75,4 +75,17 @@ class AdminServices {
     }
     return result;
   }
+
+  Future<String> updateOrderStatus(
+      String orderStatus, String orderNumber) async {
+    String result = 'Something went wrong';
+    if (orderStatus != null) {
+      await firestore
+          .collection('orders')
+          .doc(orderNumber)
+          .update({'orderStatus': orderStatus});
+      result = 'Order successfully changed to ${orderStatus}';
+    }
+    return result;
+  }
 }

@@ -1,9 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:burgerhub/view/admin/services/admin_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:burgerhub/constants/constant.dart';
 import 'package:burgerhub/models/product_model.dart';
@@ -24,6 +22,7 @@ class OrderInfo extends StatefulWidget {
 class _OrderInfoState extends State<OrderInfo> {
   String orderStatus = '';
   String paymentStatus = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +67,7 @@ class _OrderInfoState extends State<OrderInfo> {
                             'Ordered Products',
                             style: labelTitleStyle.copyWith(
                               fontSize: 18,
-                              color: Colors.black,
+                              color: darkTextColor,
                             ),
                           ),
                         ),
@@ -86,12 +85,13 @@ class _OrderInfoState extends State<OrderInfo> {
                                 );
                               }),
                         ),
+                        Divider(),
                         Center(
                           child: Text(
                             'Order Details',
                             style: labelTitleStyle.copyWith(
                               fontSize: 18,
-                              color: primaryColor,
+                              color: darkTextColor,
                             ),
                           ),
                         ),
@@ -110,9 +110,9 @@ class _OrderInfoState extends State<OrderInfo> {
                             OrderDetailWidget(
                               label: 'Order Status - ',
                               value: orderStatus,
-                              valueColor: orderStatus == 'Preparing'
-                                  ? Colors.green
-                                  : alertColor,
+                              valueColor: orderStatus == 'Failed'
+                                  ? alertColor
+                                  : Colors.green,
                             ),
                             OrderDetailWidget(
                               label: 'Payment Status - ',
@@ -129,10 +129,81 @@ class _OrderInfoState extends State<OrderInfo> {
                             ),
                           ],
                         ),
+                        Divider(),
+                        SizedBox(
+                          height: screenSize.height * .02,
+                        ),
+                        DropdownListWidget(
+                          orderStatus: orderStatus,
+                          headingTitle: 'Change Order Status',
+                          onChange: (value) async {
+                            await AdminServices()
+                                .updateOrderStatus(value, widget.orderId);
+                            orderStatus = value;
+                          },
+                          items: [
+                            DropdownMenuItem(
+                              child: Text(orderStatus),
+                              value: orderStatus,
+                            ),
+                            DropdownMenuItem(
+                              child: Text('Completed'),
+                              value: 'Completed',
+                            ),
+                            DropdownMenuItem(
+                              child: Text('Failed'),
+                              value: 'Failed',
+                            ),
+                          ],
+                        ),
                       ],
                     );
                   });
             }),
+      ),
+    );
+  }
+}
+
+class DropdownListWidget extends StatefulWidget {
+  String headingTitle;
+  List<DropdownMenuItem<String>> items;
+  ValueChanged onChange;
+  String orderStatus;
+
+  DropdownListWidget({
+    Key? key,
+    required this.headingTitle,
+    required this.items,
+    required this.onChange,
+    required this.orderStatus,
+  }) : super(key: key);
+
+  @override
+  State<DropdownListWidget> createState() => _DropdownListWidgetState();
+}
+
+class _DropdownListWidgetState extends State<DropdownListWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        children: [
+          Text(
+            'Change Order Status',
+            style: labelTitleStyle.copyWith(
+              fontSize: 18,
+              color: darkTextColor,
+            ),
+          ),
+          DropdownButton<String>(
+            value: widget.orderStatus,
+            isExpanded: true,
+            items: widget.items,
+            onChanged: widget.onChange,
+          )
+        ],
       ),
     );
   }
