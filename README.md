@@ -2,6 +2,9 @@
 
 A complete food app using flutter, bloc & firebase.
 
+![](https://github.com/Pratulpant01/Burger-Hub/blob/master/burgerhub_register.gif)
+
+
 **Screens Added- **
 
 1. Login Screen 
