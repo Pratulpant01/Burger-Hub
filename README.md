@@ -3,6 +3,15 @@
 A complete food app using flutter, bloc & firebase.
 
 ![](https://github.com/Pratulpant01/Burger-Hub/blob/master/burgerhub_register.gif)
+![](https://github.com/Pratulpant01/Burger-Hub/blob/master/burgerhub_signin.gif)
+![](https://github.com/Pratulpant01/Burger-Hub/blob/master/burgerhub_home.gif)
+![](https://github.com/Pratulpant01/Burger-Hub/blob/master/burgerhub_cart.gif)
+![](https://github.com/Pratulpant01/Burger-Hub/blob/master/burgerhub_cart1.gif)
+![](https://github.com/Pratulpant01/Burger-Hub/blob/master/burgerhub_search.gif)
+![](https://github.com/Pratulpant01/Burger-Hub/blob/master/burgerhub_payment%20failed.gif)
+![](https://github.com/Pratulpant01/Burger-Hub/blob/master/burgerhub_checkout.gif)
+![](https://github.com/Pratulpant01/Burger-Hub/blob/master/burgerhub_myorder.gif)
+![](https://github.com/Pratulpant01/Burger-Hub/blob/master/burgerhub_admin.gif)
 
 
 **Screens Added- **
